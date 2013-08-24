@@ -170,3 +170,6 @@
 	    (local-set-key (kbd "C-c p") 'pinMode-perso)
 	    )
 	  )
+
+
+;; Esta es una nueva función jejeje.
