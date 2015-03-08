@@ -31,8 +31,10 @@
 (if (system-is-mac)
     (setq ns-command-modifier 'meta))
 
-;(set-default-font
-; "-*-Monaco-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+
+; font (as seen in describe-font)
+(set-default-font
+ "-*-Monaco-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
 
 (provide 'general-settings)
 

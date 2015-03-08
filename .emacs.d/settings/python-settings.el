@@ -1,7 +1,7 @@
 (require 'python)
 (defun python-shell-parse-command ()
   "Return the string used to execute the inferior Python process."
-  "/usr/bin/python3 -i"
+  "/usr/local/bin/python3 -i"
   )
 
 (provide 'python-settings)
