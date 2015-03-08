@@ -11,7 +11,6 @@
 (package-initialize)			;this is the key
 
 
-
 ;; path where settings files are kept
 (add-to-list 'load-path "~/.emacs.d/settings/")
 
@@ -37,8 +36,9 @@
 ;; imaxima
 (require 'maxima-settings)
 
-;; flycheck
-(require 'flycheck-settings)
+;; flycheck in linux machine
+(if (system-is-linux)
+	(require 'flycheck-settings))
 
 ;; ido
 (require  'ido-settings)
