@@ -8,7 +8,7 @@ setopt histignorealldups sharehistory
 
 # Alias
 
-alias ls='ls -lh --color=auto'
+alias ls='ls -lh'
 
 setopt autocd
 
