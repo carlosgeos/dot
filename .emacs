@@ -14,7 +14,7 @@
 ;; path where settings files are kept
 (add-to-list 'load-path "~/.emacs.d/settings/")
 
-;; define various custom functions
+;; define various custom functions (system is mac and system is linux)
 (require 'custom-functions)
 
 ;; configure general settings
