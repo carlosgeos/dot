@@ -24,8 +24,8 @@
 ;;; Utilities ;;;
 ;---------------;
 
-;; Git
-(require 'git-settings)
+;; Magit
+(require 'magit-settings)
 
 ;; yasnippet
 (require 'yasnippet-settings)
