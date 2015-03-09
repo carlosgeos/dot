@@ -1,6 +1,7 @@
 /*
 !.emacs
-.emacs.d/
+.emacs.d/*
 !.emacs.d/settings/
 !.emacs.d/keybindings/
 !.gitignore
+!README.md
