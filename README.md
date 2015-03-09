@@ -2,4 +2,4 @@
 
 Emacs configuration files
 
-Added MBP options to emacs
+Added MBP options
