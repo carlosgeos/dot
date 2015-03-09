@@ -24,9 +24,6 @@
 ;;; Utilities ;;;
 ;---------------;
 
-;; Magit
-(require 'magit-settings)
-
 ;; yasnippet
 (require 'yasnippet-settings)
 
