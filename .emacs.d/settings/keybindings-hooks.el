@@ -1,3 +1,4 @@
+; -*- coding: utf-8 -*-
 ;; \dfrac function for LaTeX mode.
 
 (defun dfrac-perso (x y)
@@ -171,10 +172,6 @@
 	    )
 	  )
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Esta es una nueva función jejeje.holaaaaaaaa
-;;Y esta es la total!!
-;; Y esta la tercera!
-
-
-;; Este es el cuarto comentario, para probar cosillas...
+(provide 'keybindings-hooks)

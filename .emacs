@@ -1,5 +1,7 @@
+; -*- coding: utf-8 -*-
 ;;; package --- Summary
 ;;; Commentary:
+
 
 ;--------------------------------------------------;
 ;; Start all installed packages (require + config)-;
@@ -48,7 +50,14 @@
 (require 'python-settings)
 
 ;; LaTeX and Auctex
-;por hacer
+;TODO:
+
+;-----------;
+;;; Hooks ;;;
+;-----------;
+
+(require 'keybindings-hooks)
+
 
 ;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
