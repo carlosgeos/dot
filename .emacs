@@ -52,6 +52,10 @@
 ;; LaTeX and Auctex
 ;TODO:
 
+
+;; TRAMP mode
+(require 'tramp-settings)
+
 ;-----------;
 ;;; Hooks ;;;
 ;-----------;
