@@ -23,6 +23,9 @@
 ;; que da problemas al intentar printear acentos etc.
 (setenv "LC_CTYPE" "UTF-8")
 
+;; ignore dups in shell
+(setq comint-input-ignoredups t)
+
 ;; Para que los backup de Emacs vayan a un solo directorio y no
 ;; estén desperdigados.
 (setq backup-directory-alist '(("." . "~/.backupsEmacs")))
@@ -37,4 +40,3 @@
 	 "-*-Monaco-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
 
 (provide 'general-settings)
-
