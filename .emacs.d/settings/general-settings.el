@@ -40,3 +40,4 @@
 	 "-*-Monaco-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
 
 (provide 'general-settings)
+;;; general-settings.el ends here
