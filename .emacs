@@ -26,6 +26,9 @@
 ;;; Utilities ;;;
 ;---------------;
 
+;; auctex + latex
+(require 'auctex-settings)
+
 ;; yasnippet
 (require 'yasnippet-settings)
 
