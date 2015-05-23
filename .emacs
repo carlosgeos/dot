@@ -1,7 +1,7 @@
 ; -*- coding: utf-8 -*-
 ;;; package --- Summary
 ;;; Commentary:
-;test
+
 
 ;--------------------------------------------------;
 ;; Start all installed packages (require + config)-;
