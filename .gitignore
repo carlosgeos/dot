@@ -6,3 +6,4 @@
 !.emacs.d/keybindings/
 !.gitignore
 !README.md
+!.ssh/config
