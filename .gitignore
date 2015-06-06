@@ -9,4 +9,3 @@
 !.ssh
 .ssh/*
 !.ssh/config
-!.zshrc
