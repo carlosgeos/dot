@@ -1,11 +1,20 @@
 /*
+## Files not ignored
+# --- Emacs configuration files
+
 !.emacs
 !.emacs.d
 .emacs.d/*
 !.emacs.d/settings/
 !.emacs.d/keybindings/
-!.gitignore
-!README.md
+
+# --- ssh config
+
 !.ssh
 .ssh/*
 !.ssh/config
+
+# --- git files
+
+!.gitignore
+!README.md
