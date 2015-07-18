@@ -59,6 +59,9 @@
 ;; TRAMP mode
 (require 'tramp-settings)
 
+;; Web mode - from melpa
+(require 'web-mode-settings)
+
 ;-----------;
 ;;; Hooks ;;;
 ;-----------;
