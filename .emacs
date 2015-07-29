@@ -40,49 +40,53 @@
 ;; packages
 (require 'use-package)
 
+(use-package atom-one-dark-theme
+  :ensure t
+  )
+
 (use-package web-mode
-	     :ensure t
-	     :init
-	     :mode
-	     "\\.phtml\\'"
-	     "\\.php\\'"
-	     "\\.tpl\\.php\\'"
-	     "\\.[agj]sp\\'"
-	     "\\.as[cp]x\\'"
-	     "\\.erb\\'"
-	     "\\.mustache\\'"
-	     "\\.djhtml\\'"
+  :ensure t
+  :init
+  :mode
+  "\\.phtml\\'"
+  "\\.php\\'"
+  "\\.tpl\\.php\\'"
+  "\\.[agj]sp\\'"
+  "\\.as[cp]x\\'"
+  "\\.erb\\'"
+  "\\.mustache\\'"
+  "\\.djhtml\\'"
 
-	     :config
-	     (yas-activate-extra-mode 'html-mode)
-	     (setq web-mode-enable-css-colorization t)
-	     (setq web-mode-enable-auto-pairing t)
-	     (setq web-mode-enable-current-element-highlight t)
-	     (setq web-mode-markup-indent-offset 4)
-	     (setq web-mode-code-indent-offset 2)
-	     (setq web-mode-css-indent-offset 2)
+  :config
+  (yas-activate-extra-mode 'html-mode)
+  (setq web-mode-enable-css-colorization t)
+  (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-markup-indent-offset 4)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
 
-	     )
+  )
 
 (use-package tex-site
-	     :ensure auctex
-	     :init
-	     (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
-	     (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1)))
-	     )
+  :ensure auctex
+  :init
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+  (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1)))
+  )
 
 
 (use-package yasnippet
-	     :ensure t
-	     :init
-	     ;; Remove Yasnippet's default tab key binding
-	     ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-	     ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-	     ;; Set Yasnippet's key binding to shift+tab
-	     ;; (define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
+  :ensure t
+  :init
+  ;; Remove Yasnippet's default tab key binding
+  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; Set Yasnippet's key binding to shift+tab
+  ;; (define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
 
-	     (yas-global-mode 1)
-	     )
+  (yas-global-mode 1)
+  )
 
 
 
@@ -93,10 +97,10 @@
 					;TODO: add flycheck dependencies for all languages
 (if (system-is-linux)
     (use-package flycheck
-		 :ensure t
-		 :init
-		 (add-hook 'prog-mode-hook #'flycheck-mode)
-		 )
+      :ensure t
+      :init
+      (add-hook 'prog-mode-hook #'flycheck-mode)
+      )
   )
 
 ;; ido fix ;TODO:
