@@ -1,10 +1,6 @@
 ;; Usa y/n en lugar de yes/no. Es más rápido.
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Scroll one line at a time
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; 1 at a time
-;(setq mouse-wheel-progressive-speed nil) ;; don't accelerate
-
 ;; No quiero barra de scroll
 (scroll-bar-mode -1)
 
@@ -18,6 +14,9 @@
 ;; Actúa como un editor de texto normal y borrame texto cuando subraye
 ;; e introduzca nuevo texto.
 (delete-selection-mode 1)
+
+;; Electric brackets pair mode
+(add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; hace que el python-shell se ponga en UTF-8 en vez de US-ASCII, lo
 ;; que da problemas al intentar printear acentos etc.
