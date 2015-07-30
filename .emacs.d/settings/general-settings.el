@@ -29,6 +29,9 @@
 ;; estén desperdigados.
 (setq backup-directory-alist '(("." . "~/.backupsEmacs")))
 
+;; Autosave files also in a special folder
+(setq auto-save-file-name-transforms `((".*", "~/.autosavesEmacs" t)));
+
 ; set command key to be meta instead of option
 (if (system-is-mac)
     (setq ns-command-modifier 'meta))

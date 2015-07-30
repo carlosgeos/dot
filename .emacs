@@ -40,8 +40,30 @@
 ;; packages
 (require 'use-package)
 
-(use-package atom-one-dark-theme
+(use-package monokai-theme
   :ensure t
+  )
+
+(use-package expand-region
+  :ensure t
+  :bind ("C-<return>" . er/expand-region)
+  )
+
+(use-package projectile
+  :ensure t
+  )
+
+(use-package multiple-cursors
+  :ensure t
+  )
+
+
+;; Navigation
+(use-package avy 			;(ace-jump-mode is dead)
+  :ensure t
+  :bind (("C-;" . avy-goto-word-1)
+	 ("C-c SPC" . avy-goto-char))
+  ;; There are a lot more binds to set for avy!
   )
 
 (use-package web-mode
@@ -81,14 +103,14 @@
 
 (use-package yasnippet
   :ensure t
-  :init
   ;; Remove Yasnippet's default tab key binding
   ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
   ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
   ;; Set Yasnippet's key binding to shift+tab
-  ;; (define-key yas-minor-mode-map (kbd "C-;") 'yas-expand)
-
+  :init
   (yas-global-mode 1)
+  :config
+  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
   )
 
 
@@ -97,7 +119,9 @@
 (setq imaxima-fnt-size "Large")
 
 ;; flycheck in linux machine
-					;TODO: add flycheck dependencies for all languages
+;; TODO: add flycheck dependencies for all languages
+;; Javascript --> Install JSHint with NPM node shit, rest is automatic
+;; Python -->
 (if (system-is-linux)
     (use-package flycheck
       :ensure t
@@ -107,9 +131,9 @@
   )
 
 ;; ido fix ;TODO:
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
+;; (setq ido-enable-flex-matching t)
+;; (setq ido-everywhere t)
+;; (ido-mode 1)
 
 
 
@@ -127,6 +151,8 @@
 (setq tramp-default-method "ssh")
 
 ;; (setq command-line-default-directory "/linode:Documents/")
+
+;; Important to make it work
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 ;; Make C-c o the general key for switching windows
 (global-set-key (kbd "C-c o") 'other-window)

@@ -6,10 +6,10 @@
  '(ansi-color-names-vector
    ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
  '(column-number-mode t)
- '(custom-enabled-themes (quote (atom-one-dark)))
+ '(custom-enabled-themes (quote (monokai)))
  '(custom-safe-themes
    (quote
-    ("12722541c8998f056b761bf63a92216aaf4610e4eb1afe7991842a31fa28b6d8" default)))
+    ("05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
