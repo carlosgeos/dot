@@ -33,37 +33,78 @@
 
 ;; define various custom functions (system is mac and system is linux)
 (require 'custom-functions)
-
 ;; configure general settings
 (require 'general-settings)
-
-;; packages
 (require 'use-package)
+
+;; ---------- Themes
 
 (use-package monokai-theme
   :ensure t
   )
+
+;; ---------- Interface enhancement
+
+(use-package helm
+  :ensure t
+  :init
+  (helm-mode t)
+  :bind (("M-x" . helm-M-x)
+	 ("C-x C-f" . helm-find-files)
+	 ;; From helm maintainer config file, remap instead of simple
+	 ;; binding
+	 ("<remap> <list-buffers>" . helm-buffers-list))
+  :config
+  )
+
+(use-package helm-projectile)
+
+;; ---------- Navigation
+
+
 
 (use-package expand-region
   :ensure t
   :bind ("C-<return>" . er/expand-region)
   )
 
+;; ---------- Project management
+
 (use-package projectile
   :ensure t
+  :init
+  ;; config: enable cache and other settings?
+  :config
+  (projectile-global-mode)
   )
 
-(use-package multiple-cursors
-  :ensure t
+;; ---------- Error Checking
+
+;; flycheck in linux machine
+;; TODO: add flycheck dependencies for all languages
+;; Javascript --> Install JSHint with NPM node shit, rest is automatic
+;; Python -->
+(if (system-is-linux)
+    (use-package flycheck
+      :ensure t
+      :init
+      (add-hook 'prog-mode-hook #'flycheck-mode)
+      )
   )
 
 
-;; Navigation
-(use-package avy 			;(ace-jump-mode is dead)
+;; ---------- Programming
+
+(use-package yasnippet
   :ensure t
-  :bind (("C-;" . avy-goto-word-1)
-	 ("C-c SPC" . avy-goto-char))
-  ;; There are a lot more binds to set for avy!
+  ;; Remove Yasnippet's default tab key binding
+  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; Set Yasnippet's key binding to shift+tab
+  :init
+  (yas-global-mode 1)
+  :config
+  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
   )
 
 (use-package web-mode
@@ -101,40 +142,25 @@
   )
 
 
-(use-package yasnippet
+;; ---------- Editing
+
+(use-package multiple-cursors
   :ensure t
-  ;; Remove Yasnippet's default tab key binding
-  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; Set Yasnippet's key binding to shift+tab
-  :init
-  (yas-global-mode 1)
-  :config
-  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
   )
 
+(use-package avy 			;(ace-jump-mode is dead)
+  :ensure t
+  :bind (("C-;" . avy-goto-word-1)
+	 ("C-c SPC" . avy-goto-char))
+  ;; There are a lot more binds to set for avy!
+  )
+
+
+;; ---------- Misc
 
 
 ;; imaxima
-(setq imaxima-fnt-size "Large")
-
-;; flycheck in linux machine
-;; TODO: add flycheck dependencies for all languages
-;; Javascript --> Install JSHint with NPM node shit, rest is automatic
-;; Python -->
-(if (system-is-linux)
-    (use-package flycheck
-      :ensure t
-      :init
-      (add-hook 'prog-mode-hook #'flycheck-mode)
-      )
-  )
-
-;; ido fix ;TODO:
-;; (setq ido-enable-flex-matching t)
-;; (setq ido-everywhere t)
-;; (ido-mode 1)
-
+;; (setq imaxima-fnt-size "Large")
 
 
 ;; Python mode ;TODO: check if working

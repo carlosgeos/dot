@@ -25,12 +25,17 @@
 ;; ignore dups in shell
 (setq comint-input-ignoredups t)
 
-;; Para que los backup de Emacs vayan a un solo directorio y no
-;; estén desperdigados.
+;; Backup files (~file) in one directory. These files are created
+;; after saving a new version of a file. Made redundant by VCS
 (setq backup-directory-alist '(("." . "~/.backupsEmacs")))
 
-;; Autosave files also in a special folder
-(setq auto-save-file-name-transforms `((".*", "~/.autosavesEmacs" t)));
+;; Autosave files also in a special folder. These files are created
+;; continuously for modified buffers and are deleted when the buffer
+;; is saved to a file.
+(defvar autosave-dir (expand-file-name "~/.autosavesEmacs/"))
+(make-directory autosave-dir t)
+(setq auto-save-list-file-prefix autosave-dir)
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
 ; set command key to be meta instead of option
 (if (system-is-mac)
