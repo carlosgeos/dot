@@ -2,6 +2,17 @@
 ;;; package --- Summary
 ;;; Commentary: .emacs config file
 
+;; -- Contents
+;; Themes
+;; Interface Enhancement
+;; Navigation
+;; Project Management
+;; Error Checking
+;; Programming
+;; Editing
+;; Misc
+
+
 ;;---------------------------------------------------;
 ;; Start package.el (basic) and install use-package-;
 ;;---------------------------------------------------;
@@ -61,8 +72,6 @@
 
 ;; ---------- Navigation
 
-
-
 (use-package expand-region
   :ensure t
   :bind ("C-<return>" . er/expand-region)
@@ -107,16 +116,19 @@
   ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
   )
 
+;; ---------- Major Modes
+
 (use-package web-mode
   :ensure t
   :init
   (setq web-mode-enable-css-colorization t)
   (setq web-mode-enable-auto-pairing t)
-  (setq web-mode-enable-current-element-highlight t)
 
   :mode
   "\\.phtml\\'"
   "\\.php\\'"
+  "\\.html\\'"
+  "\\.js\\'"
   "\\.tpl\\.php\\'"
   "\\.[agj]sp\\'"
   "\\.as[cp]x\\'"
@@ -128,6 +140,7 @@
   (add-hook 'web-mode-hook (lambda ()
 			     "Sets the config for Web mode"
 			     (yas-activate-extra-mode 'html-mode)
+			     (yas-activate-extra-mode 'js-mode)
 			     (setq web-mode-markup-indent-offset 3)
 			     (setq web-mode-code-indent-offset 2)
 			     (setq web-mode-css-indent-offset 2)))
@@ -139,6 +152,13 @@
   :init
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
   (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1)))
+  )
+
+(use-package markdown-mode
+  :ensure t
+  :mode
+  "\\.markdown\\'"
+  "\\.md\\'"
   )
 
 
