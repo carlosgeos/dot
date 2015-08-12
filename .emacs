@@ -9,6 +9,7 @@
 ;; Project Management
 ;; Error Checking
 ;; Programming
+;; Major modes
 ;; Editing
 ;; Misc
 
@@ -117,6 +118,12 @@
   )
 
 ;; ---------- Major Modes
+
+(use-package sass-mode
+  :ensure t)
+
+(use-package yaml-mode
+  :ensure t)
 
 (use-package web-mode
   :ensure t
