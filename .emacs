@@ -69,7 +69,8 @@
   :config
   )
 
-(use-package helm-projectile)
+(use-package helm-projectile
+  :ensure t)
 
 ;; ---------- Navigation
 
@@ -119,8 +120,16 @@
 
 ;; ---------- Major Modes
 
-(use-package sass-mode
+(use-package php-mode
   :ensure t)
+
+(use-package sass-mode
+  :ensure t
+  :config
+  (add-hook 'web-mode-hook (lambda ()
+			     "Sets the config for Web mode"
+			     (yas-activate-extra-mode 'css-mode)))
+  )
 
 (use-package yaml-mode
   :ensure t)
@@ -133,7 +142,6 @@
 
   :mode
   "\\.phtml\\'"
-  "\\.php\\'"
   "\\.html\\'"
   "\\.js\\'"
   "\\.tpl\\.php\\'"
