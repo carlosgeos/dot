@@ -123,6 +123,9 @@
 (use-package php-mode
   :ensure t)
 
+(use-package slim-mode
+  :ensure t)
+
 (use-package sass-mode
   :ensure t
   :config
