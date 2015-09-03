@@ -69,9 +69,6 @@
   :config
   )
 
-(use-package helm-projectile
-  :ensure t)
-
 ;; ---------- Navigation
 
 (use-package expand-region
@@ -87,6 +84,12 @@
   ;; config: enable cache and other settings?
   :config
   (projectile-global-mode)
+  )
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on)
   )
 
 ;; ---------- Error Checking
