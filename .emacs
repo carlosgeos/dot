@@ -132,10 +132,17 @@
 (use-package sass-mode
   :ensure t
   :config
-  (add-hook 'web-mode-hook (lambda ()
-			     "Sets the config for Web mode"
-			     (yas-activate-extra-mode 'css-mode)))
+  (add-hook 'sass-mode-hook (lambda ()
+			      (yas-activate-extra-mode 'css-mode)))
   )
+
+(use-package scss-mode
+  :ensure t
+  :config
+  (add-hook 'scss-mode-hook (lambda ()
+			      (yas-activate-extra-mode 'css-mode)))
+  )
+
 
 (use-package yaml-mode
   :ensure t)
