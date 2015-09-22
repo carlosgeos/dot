@@ -17,6 +17,7 @@
 ;;---------------------------------------------------;
 ;; Start package.el (basic) and install use-package-;
 ;;---------------------------------------------------;
+
 (require 'package)
 ;;; Code:
 (defvar package-list)
@@ -118,7 +119,15 @@
   :init
   (yas-global-mode 1)
   :config
-  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
+  ;; Creates conflict with avy mode for jumping to char but should be
+  ;; ok.
+  (bind-key "C-;" 'yas-expand yas-minor-mode-map)
+  )
+
+(use-package auto-complete
+  :ensure t
+  :init
+  (ac-config-default)
   )
 
 ;; ---------- Major Modes
