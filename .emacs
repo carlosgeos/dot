@@ -191,6 +191,9 @@
   (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1)))
   )
 
+(use-package ess
+  :ensure t)
+
 (use-package markdown-mode
   :ensure t
   :mode
