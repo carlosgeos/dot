@@ -132,6 +132,13 @@
 
 ;; ---------- Major Modes
 
+(add-to-list 'load-path "/usr/local/Cellar/maxima/5.36.1/share/maxima/5.36.1/emacs")
+(use-package imaxima
+  :config
+  (setq imaxima-fnt-size "Large")
+
+  )
+
 (use-package php-mode
   :ensure t)
 
@@ -219,9 +226,14 @@
 
 ;; ---------- Misc
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
 
 ;; imaxima
-;; (setq imaxima-fnt-size "Large")
 
 
 ;; Python mode ;TODO: check if working
