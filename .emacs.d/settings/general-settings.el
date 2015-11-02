@@ -1,3 +1,5 @@
+(setq inhibit-startup-message t)
+
 ;; Usa y/n en lugar de yes/no. Es más rápido.
 (fset 'yes-or-no-p 'y-or-n-p)
 
