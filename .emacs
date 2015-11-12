@@ -95,17 +95,11 @@
 
 ;; ---------- Error Checking
 
-;; flycheck in linux machine
-;; TODO: add flycheck dependencies for all languages
-;; Javascript --> Install JSHint with NPM node shit, rest is automatic
-;; Python -->
-(if (system-is-linux)
-    (use-package flycheck
-      :ensure t
-      :init
-      (add-hook 'prog-mode-hook #'flycheck-mode)
-      (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
-      )
+(use-package flycheck
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook #'flycheck-mode)
+  (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
   )
 
 ;; ---------- Programming
