@@ -10,10 +10,6 @@
  '(custom-safe-themes
    (quote
     ("05c3bc4eb1219953a4f182e10de1f7466d28987f48d647c01f1f0037ff35ab9a" default)))
- '(safe-local-variable-values
-   (quote
-    ((flycheck-gcc-language-standard . c++14)
-     (flycheck-gcc-warnings -Wpedantic -Wall -Wextra -Wconversion -Weffc++ -Wstrict-null-sentinel -Wold-style-cast -Wnoexcept -Wctor-dtor-privacy -Woverloaded-virtual -Wsign-promo -Wzero-as-null-pointer-constant -Wsuggest-final-types -Wsuggest-final-methods -Wsuggest-override))))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
