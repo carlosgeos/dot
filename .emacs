@@ -101,6 +101,11 @@
 
 (use-package helm-gtags
   :ensure t
+  :bind (("M-." . helm-gtags-dwim))
+  :config
+  (add-hook 'c-mode-hook 'helm-gtags-mode)
+  (add-hook 'c++-mode-hook 'helm-gtags-mode)
+  (add-hook 'asm-mode-hook 'helm-gtags-mode)
   )
 
 ;; ---------- Error Checking
