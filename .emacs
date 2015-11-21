@@ -56,6 +56,16 @@
   :ensure t
   )
 
+(use-package smart-mode-line
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'sml/setup t)
+  )
+
+(use-package smart-mode-line-powerline-theme
+  :ensure t
+  )
+
 ;; ---------- Interface enhancement
 
 (use-package helm
@@ -93,6 +103,10 @@
   (helm-projectile-on)
   )
 
+(use-package helm-gtags
+  :ensure t
+  )
+
 ;; ---------- Error Checking
 
 (use-package flycheck
@@ -103,6 +117,10 @@
   )
 
 ;; ---------- Programming
+
+(use-package function-args
+  :ensure t
+  )
 
 (use-package yasnippet
   :ensure t
