@@ -62,10 +62,6 @@
   (add-hook 'after-init-hook 'sml/setup t)
   )
 
-(use-package smart-mode-line-powerline-theme
-  :ensure t
-  )
-
 ;; ---------- Interface enhancement
 
 (use-package helm
