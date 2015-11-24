@@ -14,7 +14,7 @@
 )
 
 (add-hook 'LaTeX-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c d") 'dfrac-perso)
 	    )
 	  )
@@ -34,7 +34,7 @@
 )
 
 (add-hook 'LaTeX-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c f") 'frac-perso)
 	    )
 	  )
@@ -51,7 +51,7 @@
 )
 
 (add-hook 'LaTeX-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c m") 'display-math-perso)
 	    )
 	  )
@@ -67,26 +67,11 @@
 )
 
 (add-hook 'LaTeX-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c i") 'math-inline-perso)
 	    )
 	  )
 
-
-;; HTML mode, ptag function + keybinding.
-
-(defun ptag-perso ()
-  "Inserts opening and closing <p></p>"
-  (interactive)
-  (insert "<p></p>")
-  (backward-char 4)
-  )
-
-(add-hook 'html-mode
-	  (lambda ()
-	    (local-set-key (kbd "C-x p") 'ptag-perso)
-	    )
-	  )
 
 ;; For Arduino mode, some abbreviations...
 
@@ -103,7 +88,7 @@
 )
 
 (add-hook 'arduino-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c c") 'const-int-perso)
 	    )
 	  )
@@ -121,7 +106,7 @@
 )
 
 (add-hook 'arduino-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c i") 'int-perso)
 	    )
 	  )
@@ -140,11 +125,11 @@
   (newline)
   (insert "}")
   (backward-char 23)
-  (message "Setup created! You can now start working faggot")
+  (message "Setup created!")
 )
 
 (add-hook 'arduino-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c s") 'setup-perso)
 	    )
 	  )
@@ -167,7 +152,7 @@
 )
 
 (add-hook 'arduino-mode-hook
-	  (lambda () 
+	  (lambda ()
 	    (local-set-key (kbd "C-c p") 'pinMode-perso)
 	    )
 	  )
