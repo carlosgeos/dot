@@ -18,3 +18,7 @@
 
 !.gitignore
 !README.md
+
+# --- top config
+
+!.toprc
