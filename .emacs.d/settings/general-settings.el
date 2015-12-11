@@ -6,6 +6,9 @@
 ;; No quiero barra de scroll
 (scroll-bar-mode -1)
 
+;; Use arrows to move around split windows.
+(windmove-default-keybindings)
+
 ;; No quiero tool bar, sólo menu bar por el momento
 (tool-bar-mode 0)
 
