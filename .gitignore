@@ -1,3 +1,4 @@
+## Ignore All
 /*
 ## Files not ignored
 # --- Emacs configuration files
@@ -14,11 +15,18 @@
 .ssh/*
 !.ssh/config
 
-# --- git files
+# --- git files and config
 
 !.gitignore
 !README.md
+!.config/git/config
 
 # --- top config
 
 !.toprc
+
+# --- xinit, bash profile etc
+
+!.Xresources
+!.xinitrc
+!.bash_profile
