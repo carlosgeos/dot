@@ -1,6 +1,7 @@
 ## Ignore All
 /*
 ## Files not ignored
+!.gitignore
 # --- Emacs configuration files
 
 !.emacs
@@ -15,11 +16,13 @@
 .ssh/*
 !.ssh/config
 
-# --- git files and config
+# --- config files
 
-!.gitignore
-!README.md
-!.config/git/config
+!.config
+.config/*
+!.config/i3
+!.config/git
+!.config/fontconfig
 
 # --- top config
 
