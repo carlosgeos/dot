@@ -20,6 +20,6 @@ URxvt*color8: grey50
 URxvt*color9: red
 URxvt*color10: green
 URxvt*color11: yellow
-URxvt*color12: blue
+URxvt*color12: cyan
 URxvt*color13: magenta
 URxvt*color14: cyan

@@ -53,4 +53,3 @@ xkbset accessx sticky -twokey -latchlock
 setxkbmap -layout us -variant intl
 # i3 wm
 exec i3
-
