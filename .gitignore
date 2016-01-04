@@ -34,3 +34,7 @@
 !.Xresources
 !.xinitrc
 !.bash_profile
+
+# --- rtorrent
+
+!.rtorrent.rc
