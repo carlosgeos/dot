@@ -33,8 +33,6 @@ if [ -f "$usermodmap" ]; then
 
 fi
 
-# start some nice programs
-
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
   [ -x "$f" ] && . "$f"
@@ -44,6 +42,9 @@ fi
 
 # sticky keys
 xkbset accessx sticky -twokey -latchlock
+
+# international us with dead grave layout + caps lock as ctrl (emacs)
 setxkbmap -layout us -variant intl -option ctrl:nocaps
+
 # i3 wm
 exec i3
