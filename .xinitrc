@@ -46,5 +46,8 @@ xkbset accessx sticky -twokey -latchlock
 # international us with dead grave layout + caps lock as ctrl (emacs)
 setxkbmap -layout us -variant intl -option ctrl:nocaps
 
+# emacs daemon before anything, for graphical sessions
+emacs --daemon &
+
 # i3 wm
 exec i3

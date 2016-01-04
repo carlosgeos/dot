@@ -30,7 +30,7 @@ font pango:Terminus, monospaced, Terminus Bold Semi-Condensed, DejaVu Sans Mono 
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id urxvt
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -156,3 +156,11 @@ bar {
         tray_output primary
 	separator_symbol "|"
 }
+
+## Some keybindings
+bindsym $mod+z move container to workspace 3; workspace 3 # hide current thing, moving it to workspace 3
+bindsym $mod+p exec poweroff
+bindsym $mod+o exec reboot
+bindsym $mod+b exec firefox
+bindsym $mod+n exec --no-startup-id emacsclient -nc
+
