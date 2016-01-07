@@ -1,8 +1,8 @@
+;;; .emacs --- emacs configuration file
 ;; -*- coding: utf-8 -*-
-;;; package --- Summary
-;;; Commentary: .emacs config file
+;;; Commentary:
 
-;; -- Contents
+;; -- these are the contents:
 ;; Themes
 ;; Interface Enhancement
 ;; Navigation
@@ -13,13 +13,13 @@
 ;; Editing
 ;; Misc
 
+;;; Code:
 
 ;;---------------------------------------------------;
-;; Start package.el (basic) and install use-package-;
+;; Start package.el (basic) and install use-package  ;
 ;;---------------------------------------------------;
 
 (require 'package)
-;;; Code:
 (defvar package-list)
 (setq package-list '(use-package))
 
@@ -155,7 +155,6 @@
 (use-package imaxima
   :config
   (setq imaxima-fnt-size "Large")
-
   )
 
 (use-package php-mode
@@ -281,7 +280,6 @@
 ;;-----------;
 
 (require 'keybindings-hooks)
-
 
 ;;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
