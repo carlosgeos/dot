@@ -1,34 +1,39 @@
+;;; general-settings.el --- some general stuff for Emacs
+;;; Commentary:
+
+
+;;; Code:
+
+;; no startup message
 (setq inhibit-startup-message t)
 
-;; Usa y/n en lugar de yes/no. Es más rápido.
+;; y/n instead of yes/no
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; No quiero barra de scroll
+;; no scroll bar
 (scroll-bar-mode -1)
 
-;; Use arrows to move around split windows.
+;; use arrows to move around split windows.
 (windmove-default-keybindings)
 
-;; No quiero tool bar, sólo menu bar por el momento
-(tool-bar-mode 0)
+;; no tool bar
+(tool-bar-mode nil)
 
 ;; show the current line and column numbers in the stats bar as well
-(line-number-mode 1)
-(column-number-mode 1)
+(line-number-mode t)
+(column-number-mode t)
 
-;; Actúa como un editor de texto normal y borrame texto cuando subraye
-;; e introduzca nuevo texto.
-(delete-selection-mode 1)
+;; no dups in search history or minibuffer
+(setq history-delete-duplicates t)
 
-;; Electric brackets pair mode
+;; "normal" text editor behaviour
+(delete-selection-mode t)
+
+;; electric brackets pair mode
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
-;; hace que el python-shell se ponga en UTF-8 en vez de US-ASCII, lo
-;; que da problemas al intentar printear acentos etc.
-(setenv "LC_CTYPE" "UTF-8")
-
-;; ignore dups in shell
-(setq comint-input-ignoredups t)
+;; solves some problems with python shell and accents
+;; (setenv "LC_CTYPE" "UTF-8")
 
 ;; Backup files (~file) in one directory. These files are created
 ;; after saving a new version of a file. Made redundant by VCS
@@ -45,11 +50,6 @@
 ; set command key to be meta instead of option
 (if (system-is-mac)
     (setq ns-command-modifier 'meta))
-
-; font (as seen in describe-font)
-(if (system-is-mac)
-	(set-default-font
-	 "-*-Monaco-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1"))
 
 (provide 'general-settings)
 ;;; general-settings.el ends here
