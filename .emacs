@@ -111,6 +111,11 @@
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
   )
 
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status)
+  )
+
 ;; ---------- Error Checking
 
 (use-package flycheck
@@ -276,7 +281,7 @@
 
 
 ;;-----------;
-;;; Hooks ;;;
+;;; Hooks  ;;;
 ;;-----------;
 
 (require 'keybindings-hooks)
