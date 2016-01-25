@@ -157,10 +157,16 @@ bar {
 	separator_symbol "|"
 }
 
+
 ## Some keybindings
+
+# audio control
+# bindsym XF86AudioRaiseVolume exec "amixer -q set Master,0 1+ unmute"
+# bindsym XF86AudioLowerVolume exec "amixer -q set Master,0 1- unmute"
+# bindsym XF86AudioMute exec "amixer -q sset Master,0 toggle"
+
 bindsym $mod+z move container to workspace 3; workspace 3 # hide current thing, moving it to workspace 3
-bindsym $mod+p exec poweroff
-bindsym $mod+o exec reboot
+bindsym $mod+p exec systemctl poweroff
+bindsym $mod+o exec systemctl reboot
 bindsym $mod+b exec firefox
 bindsym $mod+n exec --no-startup-id emacsclient -nc
-
