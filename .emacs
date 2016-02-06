@@ -168,6 +168,9 @@
 (use-package slim-mode
   :ensure t)
 
+(use-package coffee-mode
+  :ensure t)
+
 (use-package sass-mode
   :ensure t
   :config

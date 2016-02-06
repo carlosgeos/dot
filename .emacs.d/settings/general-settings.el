@@ -32,6 +32,9 @@
 ;; electric brackets pair mode
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
+;; different indentation for c code
+(setq-default c-basic-offset 4)
+
 ;; solves some problems with python shell and accents
 ;; (setenv "LC_CTYPE" "UTF-8")
 
