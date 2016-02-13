@@ -33,7 +33,10 @@
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; different indentation for c code
-(setq-default c-basic-offset 4)
+(setq-default c-default-style "k&r")
+
+;; indent by default when newline
+(global-set-key (kbd "RET") 'newline-and-indent)
 
 ;; solves some problems with python shell and accents
 ;; (setenv "LC_CTYPE" "UTF-8")
