@@ -23,6 +23,10 @@
 (line-number-mode t)
 (column-number-mode t)
 
+;; Do not allow horizontal split (on top of each other). Split side by side.
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
+
 ;; no dups in search history or minibuffer
 (setq history-delete-duplicates t)
 
@@ -33,7 +37,7 @@
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
 ;; different indentation for c code
-(setq-default c-default-style "k&r")
+(setq-default c-default-style "stroustrup")
 
 ;; indent by default when newline
 (global-set-key (kbd "RET") 'newline-and-indent)
