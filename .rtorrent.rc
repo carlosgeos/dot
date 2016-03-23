@@ -6,7 +6,7 @@ directory = ./Downloads/Torrents/
 session = ./.rtorrent
 
 # Set max share ratio
-ratio.max.set = 700
+ratio.max.set = 95
 
 # When seeding ratio is reached close the torrent
 system.method.set = group.seeding.ratio.command, d.close=
