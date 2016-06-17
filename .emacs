@@ -127,7 +127,7 @@
   (add-hook 'c++-mode-hook
 	    (lambda ()
 	      (setq flycheck-gcc-language-standard "c++14")
-	      (setq flycheck-c/c++-gcc-executable "g++-5")
+	      (setq flycheck-c/c++-gcc-executable "g++-6")
 	      (flycheck-select-checker 'c/c++-gcc)
 	      )
 	    ) ;it does not interfere with c mode.
@@ -242,7 +242,6 @@
   "\\.markdown\\'"
   "\\.md\\'"
   )
-
 
 ;; ---------- Editing
 
