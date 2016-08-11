@@ -23,7 +23,7 @@
 (line-number-mode t)
 (column-number-mode t)
 
-;; Do not allow horizontal split (on top of each other). Split side by side.
+;; do not allow horizontal split (on top of each other). Split side by side.
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
@@ -33,6 +33,9 @@
 ;; "normal" text editor behaviour
 (delete-selection-mode t)
 
+;; human readable Dired buffer
+(setq dired-listing-switches "-alh")
+
 ;; electric brackets pair mode
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
@@ -41,6 +44,11 @@
 
 ;; indent by default when newline
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+;; move one paragraph forwards/backwards
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+
 
 ;; solves some problems with python shell and accents
 ;; (setenv "LC_CTYPE" "UTF-8")

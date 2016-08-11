@@ -105,7 +105,6 @@
   :init
   (setq helm-gtags-auto-update t)
   :config
-
   (add-hook 'c-mode-hook 'helm-gtags-mode)
   (add-hook 'c++-mode-hook 'helm-gtags-mode)
   (add-hook 'asm-mode-hook 'helm-gtags-mode)
@@ -134,12 +133,6 @@
   )
 
 ;; ---------- Programming
-
-(use-package function-args
-  :ensure t
-  :config
-  (fa-config-default)
-  )
 
 (use-package yasnippet
   :ensure t
