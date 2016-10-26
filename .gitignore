@@ -4,9 +4,10 @@
 !.gitignore
 # --- Emacs configuration files
 
-!.emacs
 !.emacs.d
 .emacs.d/*
+!.emacs.d/init.el
+.emacs.d/settings/custom.el
 !.emacs.d/settings/
 !.emacs.d/keybindings/
 

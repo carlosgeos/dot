@@ -1,4 +1,4 @@
-;;; .emacs --- emacs configuration file
+;;; .init.el --- emacs configuration file
 ;; -*- coding: utf-8 -*-
 ;;; Commentary:
 
@@ -95,6 +95,9 @@
 
 (use-package helm-projectile
   :ensure t
+  :defer 0.1				;defer turning on helm
+					;projectile 0.1 s (error
+					;otherwise)
   :config
   (helm-projectile-on)
   )
@@ -121,8 +124,10 @@
   :ensure t
   :init
   (add-hook 'prog-mode-hook #'flycheck-mode)
-  ;(setq-default flycheck-disabled-checkers '(c/c++-clang))
-  (setq-default flycheck-gcc-warnings '("pedantic" "all" "extra" "conversion" "effc++" "strict-null-sentinel" "old-style-cast" "noexcept" "ctor-dtor-privacy" "overloaded-virtual" "sign-promo" "zero-as-null-pointer-constant" "suggest-final-types" "suggest-final-methods" "suggest-override"))
+
+  ;; SHOULD BE DONE ON A PER PROJECT BASIS WITH DIR LOCALS
+  ;; (setq-default flycheck-disabled-checkers '(c/c++-clang))
+  ;; (setq-default flycheck-gcc-warnings '("pedantic" "all" "extra" "conversion" "effc++" "strict-null-sentinel" "old-style-cast" "noexcept" "ctor-dtor-privacy" "overloaded-virtual" "sign-promo" "zero-as-null-pointer-constant" "suggest-final-types" "suggest-final-methods" "suggest-override"))
   (add-hook 'c++-mode-hook
 	    (lambda ()
 	      (setq flycheck-gcc-language-standard "c++14")
@@ -258,24 +263,15 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+(use-package bbdb
+  :ensure t
+  :init
 
-;; imaxima
-
-
-;; Python mode ;TODO: check if working
-;; Try :interpreter option from use-package
-
-;; (defun python-shell-parse-command ()
-;;   "Return the string used to execute the inferior Python process."
-;;   "/usr/local/bin/python3 -i"
-;;   )
-
+  )
 
 
 ;; TRAMP mode
 (setq tramp-default-method "ssh")
-
-;; (setq command-line-default-directory "/linode:Documents/")
 
 ;; Important to make it work
 (setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
@@ -295,7 +291,3 @@
 (load
  (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
  'noerror)
-
-
-;;(provide .emacs)
-;;; .emacs ends here
