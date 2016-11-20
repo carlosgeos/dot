@@ -22,6 +22,7 @@
 (require 'package)
 (defvar package-list)
 (setq package-list '(use-package))
+(setq load-prefer-newer t)
 
 ;; The good repo
 (add-to-list 'package-archives
@@ -95,9 +96,6 @@
 
 (use-package helm-projectile
   :ensure t
-  :defer 0.1				;defer turning on helm
-					;projectile 0.1 s (error
-					;otherwise)
   :config
   (helm-projectile-on)
   )
@@ -172,6 +170,9 @@
   :ensure t)
 
 (use-package slim-mode
+  :ensure t)
+
+(use-package handlebars-mode
   :ensure t)
 
 (use-package coffee-mode

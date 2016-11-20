@@ -17,7 +17,10 @@
 (windmove-default-keybindings)
 
 ;; no tool bar
-(tool-bar-mode nil)
+(tool-bar-mode -1)
+
+;; no menu bar
+(menu-bar-mode -1)
 
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
