@@ -160,7 +160,7 @@
 ;; ---------- Major Modes
 
 (when (memq window-system '(mac ns))
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.37.2/share/maxima/5.37.2/emacs"))
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.38.1/share/maxima/5.38.1/emacs"))
 (use-package imaxima
   :config
   (setq imaxima-fnt-size "Large")
