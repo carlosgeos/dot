@@ -212,6 +212,7 @@
   "\\.erb\\'"
   "\\.mustache\\'"
   "\\.djhtml\\'"
+  "\\.hbs\\'"
 
   :config
   (add-hook 'web-mode-hook (lambda ()
