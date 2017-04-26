@@ -247,6 +247,10 @@
   :ensure t
   )
 
+(use-package groovy-mode
+  :ensure t
+  )
+
 ;; ---------- Editing
 
 (use-package multiple-cursors
