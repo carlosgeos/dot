@@ -56,6 +56,14 @@
 ;; solves some problems with python shell and accents
 ;; (setenv "LC_CTYPE" "UTF-8")
 
+;;
+(defun untabify-except-makefiles ()
+  "Replace tabs with spaces except in makefiles."
+  (unless (derived-mode-p 'makefile-mode)
+    (untabify (point-min) (point-max))))
+
+(add-hook 'before-save-hook 'untabify-except-makefiles)
+
 ;; Backup files (~file) in one directory. These files are created
 ;; after saving a new version of a file. Made redundant by VCS
 (setq backup-directory-alist '(("." . "~/.backupsEmacs")))
