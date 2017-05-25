@@ -1,7 +1,10 @@
 ## Ignore All
 /*
+
 ## Files not ignored
+
 !.gitignore
+
 # --- Emacs configuration files
 
 !.emacs.d
@@ -10,6 +13,9 @@
 .emacs.d/settings/custom.el
 !.emacs.d/settings/
 !.emacs.d/keybindings/
+!.emacs.d/eshell
+.emacs.d/eshell/*
+!.emacs.d/eshell/alias
 
 # --- ssh config
 

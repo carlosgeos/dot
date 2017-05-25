@@ -52,15 +52,8 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
-
 ;; solves some problems with python shell and accents
 ;; (setenv "LC_CTYPE" "UTF-8")
-
-;;
-(defun untabify-except-makefiles ()
-  "Replace tabs with spaces except in makefiles."
-  (unless (derived-mode-p 'makefile-mode)
-    (untabify (point-min) (point-max))))
 
 (add-hook 'before-save-hook 'untabify-except-makefiles)
 
