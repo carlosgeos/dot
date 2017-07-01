@@ -49,6 +49,7 @@
 (require 'major-modes)
 (require 'misc)
 (require 'appearance)
+
 ;; TRAMP mode
 (setq tramp-default-method "ssh")
 

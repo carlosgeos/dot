@@ -16,5 +16,8 @@
               )
             ) ;it does not interfere with c mode.
   )
+  :config
+  (setq flycheck-python-pycompile-executable "python3")
+
 
 (provide 'linting)
