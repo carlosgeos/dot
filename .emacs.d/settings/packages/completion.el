@@ -14,16 +14,14 @@
 
 (use-package yasnippet
   :ensure t
-  ;; Remove Yasnippet's default tab key binding
-  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; Set Yasnippet's key binding to shift+tab
+  :bind ("C-m" . yas-expand)
   :init
   (yas-global-mode 1)
   :config
-  ;; Creates conflict with avy mode for jumping to char but should be
-  ;; ok.
-  (bind-key "C-;" 'yas-expand yas-minor-mode-map)
+  ;; Remove Yasnippet's default tab key binding
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
   )
 
 (use-package auto-complete
