@@ -14,20 +14,18 @@
 
 (use-package yasnippet
   :ensure t
-  :bind ("C-m" . yas-expand)
   :init
   (yas-global-mode 1)
   :config
   ;; Remove Yasnippet's default tab key binding
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  ;; (bind-key "C-;" 'yas-expand yas-minor-mode-map)
+  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
   )
 
-(use-package auto-complete
+(use-package company-mode
   :ensure t
   :init
-  (ac-config-default)
+  (global-company-mode)
   )
 
 (provide 'completion)
