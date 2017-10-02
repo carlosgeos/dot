@@ -22,7 +22,7 @@
   ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
   )
 
-(use-package company-mode
+(use-package company
   :ensure t
   :init
   (global-company-mode)
