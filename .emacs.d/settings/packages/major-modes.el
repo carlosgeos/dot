@@ -1,9 +1,10 @@
 ;; ---------- Major Modes
 
 (when (memq window-system '(mac ns))
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.38.1/share/maxima/5.38.1/emacs"))
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.40.0/share/maxima/5.40.0/emacs"))
 (use-package imaxima
   :config
+  (setq imaxima-equation-color "#ffffff")
   (setq imaxima-fnt-size "Large")
   )
 
