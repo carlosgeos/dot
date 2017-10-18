@@ -3,7 +3,11 @@
 (use-package projectile
   :ensure t
   :init
-  ;; config: enable cache and other settings?
+  ;; Workaround laggy emacs editor
+  ;; see https://github.com/bbatsov/projectile/issues/1183
+  (setq projectile-mode-line
+        '(:eval (format " Projectile[%s]"
+                        (projectile-project-name))))
   :config
   (projectile-global-mode)
   )

@@ -11,7 +11,8 @@
   (add-hook 'c++-mode-hook
             (lambda ()
               (setq flycheck-gcc-language-standard "c++14")
-              (setq flycheck-c/c++-gcc-executable "g++-6")
+              (if (system-is-mac)
+                (setq flycheck-c/c++-gcc-executable "clang++"))
               (flycheck-select-checker 'c/c++-gcc)
               )
             ) ;it does not interfere with c mode.
