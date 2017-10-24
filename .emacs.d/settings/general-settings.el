@@ -42,6 +42,9 @@
 ;; electric brackets pair mode
 (add-hook 'prog-mode-hook #'electric-pair-mode)
 
+;; show matching paren
+(show-paren-mode 1)
+
 ;; different indentation for c code
 (setq-default c-default-style "stroustrup")
 
