@@ -3,6 +3,7 @@
 ;; Functional programming
 
 (use-package clojure-mode
+  ; also check out CIDER in misc file !
   :ensure t
   )
 

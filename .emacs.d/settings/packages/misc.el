@@ -5,4 +5,8 @@
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)))
 
+(use-package cider
+  :ensure t
+  )
+
 (provide 'misc)
