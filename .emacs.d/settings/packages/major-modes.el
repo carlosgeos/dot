@@ -102,6 +102,9 @@
                               (yas-activate-extra-mode 'css-mode)))
   )
 
+(use-package restclient
+  :ensure t
+  )
 
 ;; Data
 
