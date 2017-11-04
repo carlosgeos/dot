@@ -13,8 +13,25 @@
 ;; no scroll bar
 (scroll-bar-mode -1)
 
-;; use arrows to move around split windows.
+;; use arrows + shift to move around split windows. not very useful
+;; but whatever
 (windmove-default-keybindings)
+
+;; always open these buffers in current buffer. those strings should
+;; be regexes
+(add-to-list 'display-buffer-alist
+             '("\\*YASnippet Tables\\*" display-buffer-same-window)
+             '("\\*Help\\*" display-buffer-same-window))
+
+;; Auto refresh buffers
+(global-auto-revert-mode 1)
+
+;; Move files to trash when deleting
+(setq delete-by-moving-to-trash t)
+
+;; Do not use shift to select stuff. Wouldn't work since
+;; windmove-default-keybindings is activated anyway...
+(setq shift-select-mode nil)
 
 ;; no tool bar
 (tool-bar-mode -1)

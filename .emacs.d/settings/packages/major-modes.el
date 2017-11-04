@@ -4,24 +4,22 @@
 
 (use-package clojure-mode
   ; also check out CIDER in misc file !
-  :ensure t
-  )
+  :ensure t)
 
 ;; Other
 
 (use-package groovy-mode
-  :ensure t
-  )
+  :ensure t)
 
 ;; Maths, R, stats, etc
 
 (when (memq window-system '(mac ns))
   (add-to-list 'load-path "/usr/local/Cellar/maxima/5.40.0/share/maxima/5.40.0/emacs"))
+
 (use-package imaxima
   :config
   (setq imaxima-equation-color "#ffffff")
-  (setq imaxima-fnt-size "Large")
-  )
+  (setq imaxima-fnt-size "Large"))
 
 (use-package ess-site
   :ensure ess
@@ -33,15 +31,13 @@
   :ensure auctex
   :init
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
-  (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1)))
-  )
+  (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1))))
 
 (use-package markdown-mode
   :ensure t
   :mode
   "\\.markdown\\'"
-  "\\.md\\'"
-  )
+  "\\.md\\'")
 
 ;; Web
 
@@ -71,13 +67,10 @@
                              (yas-activate-extra-mode 'js-mode)
                              (setq web-mode-markup-indent-offset 3)
                              (setq web-mode-code-indent-offset 2)
-                             (setq web-mode-css-indent-offset 2)))
-
-  )
+                             (setq web-mode-css-indent-offset 2))))
 
 (use-package typescript-mode
-  :ensure t
-  )
+  :ensure t)
 
 (use-package slim-mode
   :ensure t)
@@ -92,25 +85,23 @@
   :ensure t
   :config
   (add-hook 'sass-mode-hook (lambda ()
-                              (yas-activate-extra-mode 'css-mode)))
-  )
+                              (yas-activate-extra-mode 'css-mode))))
 
 (use-package scss-mode
   :ensure t
   :config
   (add-hook 'scss-mode-hook (lambda ()
-                              (yas-activate-extra-mode 'css-mode)))
-  )
+                              (yas-activate-extra-mode 'css-mode))))
 
 (use-package restclient
   :ensure t
-  )
+  :mode
+  "\\.http$")
 
 ;; Data
 
 (use-package yaml-mode
   :ensure t)
-
 
 
 (provide 'major-modes)

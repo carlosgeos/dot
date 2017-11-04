@@ -7,6 +7,10 @@
 
 (use-package cider
   :ensure t
+  :init
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+  (setq cider-repl-use-pretty-printing t)
+  (setq cider-history-file "~/.emacs.d/nrepl-history")
   )
 
 (provide 'misc)
