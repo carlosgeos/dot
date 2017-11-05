@@ -20,7 +20,8 @@
 ;; always open these buffers in current buffer. those strings should
 ;; be regexes
 (add-to-list 'display-buffer-alist
-             '("\\*YASnippet Tables\\*" display-buffer-same-window)
+	     '("\\*YASnippet Tables\\*" . display-buffer-same-window))
+(add-to-list 'display-buffer-alist
              '("\\*Help\\*" display-buffer-same-window))
 
 ;; Auto refresh buffers

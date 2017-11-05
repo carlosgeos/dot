@@ -4,7 +4,9 @@
 
 (use-package clojure-mode
   ; also check out CIDER in misc file !
-  :ensure t)
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook #'subword-mode))
 
 ;; Other
 
@@ -13,7 +15,7 @@
 
 ;; Maths, R, stats, etc
 
-(when (memq window-system '(mac ns))
+(when (system-is-mac)
   (add-to-list 'load-path "/usr/local/Cellar/maxima/5.40.0/share/maxima/5.40.0/emacs"))
 
 (use-package imaxima

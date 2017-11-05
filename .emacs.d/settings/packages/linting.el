@@ -12,13 +12,12 @@
             (lambda ()
               (setq flycheck-gcc-language-standard "c++14")
               (if (system-is-mac)
-                (setq flycheck-c/c++-gcc-executable "clang++"))
-              (flycheck-select-checker 'c/c++-gcc)
-              )
-            ) ;it does not interfere with c mode.
-  )
+                  (setq flycheck-c/c++-gcc-executable "clang++"))
+              (flycheck-select-checker 'c/c++-gcc)));it does not interfere with c mode.
+
+
   :config
-  (setq flycheck-python-pycompile-executable "python3")
+  (setq flycheck-python-pycompile-executable "python3"))
 
 
 (provide 'linting)
