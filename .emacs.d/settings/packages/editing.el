@@ -18,6 +18,17 @@
 (use-package paredit
   :ensure t)
 
+(use-package paxedit
+  ;; using transposing and deleting functions from paxedit, not
+  ;; smartparens
+  :ensure t
+  :init
+  ;; bindings in keychords
+  (key-chord-define-global "kk" 'paxedit-delete) ;nice sexp delete
+  :bind
+  (("M-<right>" . paxedit-transpose-forward)
+   ("M-<left>" . paxedit-transpose-backward)))
+
 (use-package smartparens
   :ensure t
   :init
@@ -34,16 +45,5 @@
    ("C-M-<left>" . sp-backward-barf-sexp)))
 ;;TODO: config bindings to navigate through sexps. 'add-to-next-sexp'
 ;;and similar are quite interesting as well
-
-(use-package paxedit
-  ;; using transposing and deleting functions from paxedit, not
-  ;; smartparens
-  :ensure t
-  :init
-  ;; bindings in keychords
-  (key-chord-define-global "kk" 'paxedit-delete) ;nice sexp delete
-  :bind
-  (("M-<right>" . paxedit-transpose-forward)
-   ("M-<left>" . paxedit-transpose-backward)))
 
 (provide 'editing)

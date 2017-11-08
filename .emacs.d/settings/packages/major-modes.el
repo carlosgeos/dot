@@ -16,7 +16,7 @@
 ;; Maths, R, stats, etc
 
 (when (system-is-mac)
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.40.0/share/maxima/5.40.0/emacs"))
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
 
 (use-package imaxima
   :config

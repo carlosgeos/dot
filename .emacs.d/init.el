@@ -42,12 +42,12 @@
 ;; configure general settings
 (require 'general-settings)
 (require 'use-package)
+(require 'major-modes)
+(require 'misc)
 (require 'completion)
 (require 'editing)
 (require 'project-mgnt)
 (require 'linting)
-(require 'major-modes)
-(require 'misc)
 (require 'appearance)
 
 ;; TRAMP mode

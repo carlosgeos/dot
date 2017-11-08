@@ -1,3 +1,4 @@
+
 ;; ---------- Themes
 
 (use-package monokai-theme
@@ -12,7 +13,7 @@
 ;;   ;; Testing, let's see if it is useful...
 ;;   :ensure t)
 
-(use-package aggresive-indent-mode
+(use-package aggressive-indent
   :ensure t
   :init
   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
