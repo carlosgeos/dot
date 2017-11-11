@@ -21,4 +21,9 @@
   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
+(use-package emojify
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'global-emojify-mode))
+
 (provide 'appearance)

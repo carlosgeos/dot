@@ -32,7 +32,7 @@
 (use-package smartparens
   :ensure t
   :init
-  (add-hook 'clojure-mode-hook #'smartparens-strict-mode)
+  (add-hook 'clojure-mode-hook #'smartparens-mode)
   (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
   (add-hook 'common-lisp-mode-hook #'smartparens-mode)
   (add-hook 'scheme-mode-hook #'smartparens-mode)
