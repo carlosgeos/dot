@@ -3,12 +3,12 @@
 ;; Functional programming
 
 (use-package clojure-mode
-  ; also check out CIDER in misc file !
+  ;; also check out CIDER in misc file !
   :ensure t
   :init
   (add-hook 'clojure-mode-hook #'subword-mode))
 
-;; Other
+;; General
 
 (use-package groovy-mode
   :ensure t)
