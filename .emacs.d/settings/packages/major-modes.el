@@ -1,6 +1,6 @@
 ;; ---------- Major Modes
 
-;; Functional programming
+;; Programming
 
 (use-package clojure-mode
   ;; also check out CIDER in misc file !
@@ -8,24 +8,8 @@
   :init
   (add-hook 'clojure-mode-hook #'subword-mode))
 
-;; General
-
 (use-package groovy-mode
   :ensure t)
-
-;; Maths, R, stats, etc
-
-(when (system-is-mac)
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
-
-(use-package imaxima
-  :config
-  (setq imaxima-equation-color "#ffffff")
-  (setq imaxima-fnt-size "Large"))
-
-(use-package ess-site
-  :ensure ess
-  :disabled t)
 
 ;; Markup
 
@@ -100,10 +84,32 @@
   :mode
   "\\.http$")
 
-;; Data
-
 (use-package yaml-mode
   :ensure t)
+
+
+;; Maths, R, stats, etc
+
+(when (system-is-mac)
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
+
+(use-package imaxima
+  :config
+  (setq imaxima-equation-color "#ffffff")
+  (setq imaxima-fnt-size "Large"))
+
+(use-package ess-site
+  :ensure ess
+  :disabled t)
+
+;; Other
+
+(use-package deft
+  :ensure t
+  :bind ("<f8>" . deft)
+  :init
+  (setq deft-extensions '("org" "txt"))
+  (setq deft-directory "~/ownCloud/deft"))
 
 
 (provide 'major-modes)
