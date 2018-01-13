@@ -23,6 +23,11 @@
   ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
   )
 
+(use-package yasnippet-snippets
+  ;; yasnippet no longer ships with the snippets, hence this is also
+  ;; necessary
+  :ensure t)
+
 (use-package company
   :ensure t
   :init
