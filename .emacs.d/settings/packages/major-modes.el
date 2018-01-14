@@ -109,7 +109,8 @@
   :bind ("<f8>" . deft)
   :init
   (setq deft-extensions '("org" "txt"))
-  (setq deft-directory "~/ownCloud/deft"))
+  (setq deft-directory "~/ownCloud/deft")
+  (setq deft-auto-save-interval 0))
 
 
 (provide 'major-modes)
