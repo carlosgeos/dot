@@ -25,6 +25,9 @@
 (add-to-list 'display-buffer-alist
              '("\\*Help\\*" display-buffer-same-window))
 
+(add-to-list 'display-buffer-alist
+             '("\\*magit-diff\\:" display-buffer-same-window))
+
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
