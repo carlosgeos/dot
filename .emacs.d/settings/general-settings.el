@@ -17,16 +17,12 @@
 ;; but whatever
 (windmove-default-keybindings)
 
-;; always open these buffers in current buffer. those strings should
+;; always open these buffers in current buffer. Buffer strings should
 ;; be regexes
-(add-to-list 'display-buffer-alist
-             '("\\*YASnippet Tables\\*" display-buffer-same-window))
 
-(add-to-list 'display-buffer-alist
-             '("\\*Help\\*" display-buffer-same-window))
-
-(add-to-list 'display-buffer-alist
-             '("\\*magit-diff\\:" display-buffer-same-window))
+(setq display-buffer-alist '(("\\*YASnippet Tables\\*" display-buffer-same-window)
+                             ("\\*Help\\*" display-buffer-same-window)
+                             ("\\*magit-diff\\:" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
