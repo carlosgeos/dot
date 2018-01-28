@@ -59,8 +59,6 @@
 (global-set-key (kbd "C-c o") 'other-window)
 
 
-(require 'keybindings-hooks)
-
 ;;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)

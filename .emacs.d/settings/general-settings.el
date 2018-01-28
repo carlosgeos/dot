@@ -121,6 +121,7 @@
 ;; (setenv "LC_CTYPE" "UTF-8")
 
 (add-hook 'before-save-hook 'untabify-except-makefiles)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Backup files (~file) in one directory. These files are created
 ;; after saving a new version of a file. Made redundant by VCS
