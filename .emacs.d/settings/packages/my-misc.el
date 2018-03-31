@@ -26,4 +26,4 @@
 (use-package indium
   :ensure t)
 
-(provide 'misc)
+(provide 'my-misc)
