@@ -5,8 +5,7 @@
 (use-package clojure-mode
   ;; also check out CIDER in misc file !
   :ensure t
-  :init
-  (add-hook 'clojure-mode-hook #'subword-mode))
+  :hook (clojure-mode . subword-mode))
 
 (use-package groovy-mode
   :ensure t)

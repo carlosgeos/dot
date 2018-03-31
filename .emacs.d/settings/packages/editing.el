@@ -79,11 +79,14 @@
 
 (use-package sphinx-doc
   :ensure t
-  :config
-  :hook python-mode)
+  :hook (python-mode . sphinx-doc-mode))
 
 (use-package clj-refactor
+  :diminish clj-refactor-mode
   :ensure t
-  :hook clojure-mode)
+  :config
+  (cljr-add-keybindings-with-prefix "C-c j")
+  :hook (clojure-mode . clj-refactor-mode))
+
 
 (provide 'editing)
