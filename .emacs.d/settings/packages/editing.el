@@ -14,7 +14,8 @@
   :ensure t
   :bind ("C-<return>" . er/expand-region))
 
-;; configure wrapping of sexps
+;; some functions are ok. global paredit mode is too strict configure
+;; wrapping of sexps
 (use-package paredit
   :ensure t)
 
@@ -39,12 +40,18 @@
   ;; LaTeX and HTML as well ??
   :bind
   (("M-s" . sp-splice-sexp)
+   ("C-M-f" . sp-forward-sexp)
+   ("C-M-b" . sp-backward-sexp)
+   ("C-M-n" . sp-next-sexp)
+   ("C-M-p" . sp-previous-sexp)
+   ("C-M-d" . sp-down-sexp)
+   ("C-M-u" . sp-up-sexp)
    ("C-<right>" . sp-forward-slurp-sexp)
    ("C-<left>" . sp-backward-slurp-sexp)
    ("C-M-<right>" . sp-forward-barf-sexp)
    ("C-M-<left>" . sp-backward-barf-sexp)))
-;;TODO: config bindings to navigate through sexps. 'add-to-next-sexp'
-;;and similar are quite interesting as well
+;; TODO: config bindings to navigate through sexps. 'add-to-next-sexp'
+;; and similar are quite interesting as well
 
 (use-package helm
   :ensure t
@@ -75,7 +82,9 @@
 (use-package company
   :ensure t
   :init
-  (global-company-mode))
+  (global-company-mode)
+  :config
+  (setq company-idle-delay 0.1))
 
 (use-package sphinx-doc
   :ensure t
