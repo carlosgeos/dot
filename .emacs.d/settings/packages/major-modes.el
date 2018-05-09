@@ -36,7 +36,6 @@
   "\\.phtml\\'"
   "\\.html\\'"
   "\\.js\\'"
-  "\\.jsx\\'"
   "\\.tpl\\.php\\'"
   "\\.[agj]sp\\'"
   "\\.as[cp]x\\'"
@@ -55,6 +54,9 @@
                              (setq web-mode-css-indent-offset 2))))
 
 (use-package typescript-mode
+  :ensure t)
+
+(use-package rjsx-mode
   :ensure t)
 
 (use-package slim-mode
