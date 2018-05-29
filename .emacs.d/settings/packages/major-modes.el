@@ -94,11 +94,6 @@
 (when (system-is-mac)
   (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
 
-(use-package imaxima
-  :config
-  (setq imaxima-equation-color "#ffffff")
-  (setq imaxima-fnt-size "Large"))
-
 (use-package ess-site
   :ensure ess
   :disabled t)
