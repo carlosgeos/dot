@@ -21,7 +21,7 @@
   :init
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
-  (setq cider-history-file "~/.emacs.d/nrepl-history"))
+  (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
 
 (use-package indium
   :ensure t)
