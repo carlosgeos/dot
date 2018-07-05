@@ -1,0 +1,3 @@
+# Excludes video ID by default
+
+-o '%(title)s.%(ext)s'
