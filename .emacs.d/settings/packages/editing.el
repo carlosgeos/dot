@@ -59,20 +59,22 @@
   (helm-mode t)
   :bind (("M-x" . helm-M-x)
          ("C-x C-f" . helm-find-files)
+         ("C-x b" . helm-mini)
+         ("M-y" . helm-show-kill-ring)
          ;; From helm maintainer config file, remap instead of simple
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
-  :config)
+  :config
+  (setq helm-mode-fuzzy-match t))
 
 (use-package yasnippet
   :ensure t
   :init
   (yas-global-mode 1)
-  :config
   ;; Remove Yasnippet's default tab key binding
-  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  )
+  (define-key yas-keymap (kbd "TAB") nil)
+  (define-key yas-keymap (kbd "<tab>") nil)
+  :bind (("C-c C-m" . yas-expand)))
 
 (use-package yasnippet-snippets
   ;; yasnippet no longer ships with the snippets, hence this is also
@@ -96,6 +98,5 @@
   :config
   (cljr-add-keybindings-with-prefix "C-c j")
   :hook (clojure-mode . clj-refactor-mode))
-
 
 (provide 'editing)
