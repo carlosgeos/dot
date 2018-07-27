@@ -20,7 +20,6 @@
              '("melpa" . "http://melpa.org/packages/")
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-;; Package.el needs to be initialized!
 (package-initialize)
 
 ;; Only refresh package list if package is not present.
@@ -31,6 +30,7 @@
 ;; Install use-package before anything else
 (dolist (package package-list)
   (unless (package-installed-p package)
+    (package-refresh-contents)
     (package-install package)))
 
 ;; path where settings files are kept

@@ -1,8 +1,10 @@
 
 ;; ---------- Themes
 
-(use-package monokai-theme
-  :ensure t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-molokai t))
 
 (use-package smart-mode-line
   :ensure t
@@ -25,5 +27,8 @@
   :ensure t
   :init
   (add-hook 'after-init-hook #'global-emojify-mode))
+
+(when (system-is-linux)
+  (set-face-attribute 'default (selected-frame) :height 150))
 
 (provide 'appearance)
