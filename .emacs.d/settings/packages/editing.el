@@ -1,8 +1,11 @@
 ;; ---------- Editing
 
 (use-package multiple-cursors
-  ;; No keybindings for the moment... using M-x
-  :ensure t)
+  ;; M-x calls to mc do not work well, keybindings are necessary
+  :ensure t
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-a" . mc/mark-all-like-this)))
 
 (use-package avy                        ;(ace-jump-mode is dead)
   :ensure t
@@ -61,6 +64,8 @@
          ("C-x C-f" . helm-find-files)
          ("C-x b" . helm-mini)
          ("M-y" . helm-show-kill-ring)
+         ("C-h SPC" . helm-all-mark-rings)
+         ("C-c h o" . helm-occur)
          ;; From helm maintainer config file, remap instead of simple
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
@@ -72,9 +77,9 @@
   :init
   (yas-global-mode 1)
   ;; Remove Yasnippet's default tab key binding
-  (define-key yas-keymap (kbd "TAB") nil)
-  (define-key yas-keymap (kbd "<tab>") nil)
-  :bind (("C-c C-m" . yas-expand)))
+                                        ; (define-key yas-keymap (kbd "TAB") nil)
+                                        ; (define-key yas-keymap (kbd "<tab>") nil)
+  :bind (("C-c ;" . yas-expand)))
 
 (use-package yasnippet-snippets
   ;; yasnippet no longer ships with the snippets, hence this is also

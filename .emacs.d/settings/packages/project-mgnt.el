@@ -5,18 +5,17 @@
   :init
   ;; Workaround laggy emacs editor
   ;; see https://github.com/bbatsov/projectile/issues/1183
+  (setq projectile-keymap-prefix (kbd "C-c p"))
   (setq projectile-mode-line
         '(:eval (format " Projectile[%s]"
                         (projectile-project-name))))
   :config
-  (projectile-global-mode)
-  )
+  (projectile-global-mode))
 
 (use-package helm-projectile
   :ensure t
   :config
-  (helm-projectile-on)
-  )
+  (helm-projectile-on))
 
 (use-package helm-gtags
   :ensure t
@@ -26,12 +25,10 @@
   :config
   (add-hook 'c-mode-hook 'helm-gtags-mode)
   (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode)
-  )
+  (add-hook 'asm-mode-hook 'helm-gtags-mode))
 
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status)
-  )
+  :bind ("C-x g" . magit-status))
 
 (provide 'project-mgnt)
