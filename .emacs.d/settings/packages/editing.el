@@ -42,7 +42,8 @@
   (add-hook 'scheme-mode-hook #'smartparens-mode)
   ;; LaTeX and HTML as well ??
   :bind
-  (("M-s" . sp-splice-sexp)
+  (("M-(" . sp-wrap-round)
+   ("M-s" . sp-splice-sexp)
    ("C-M-f" . sp-forward-sexp)
    ("C-M-b" . sp-backward-sexp)
    ("C-M-n" . sp-next-sexp)
