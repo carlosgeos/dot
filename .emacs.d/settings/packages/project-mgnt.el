@@ -6,6 +6,7 @@
   ;; Workaround laggy emacs editor
   ;; see https://github.com/bbatsov/projectile/issues/1183
   (setq projectile-keymap-prefix (kbd "C-c p"))
+  (setq projectile-completion-system 'helm)
   (setq projectile-mode-line
         '(:eval (format " Projectile[%s]"
                         (projectile-project-name))))
