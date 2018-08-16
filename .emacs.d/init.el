@@ -48,19 +48,3 @@
 (require 'project-mgnt)
 (require 'linting)
 (require 'appearance)
-
-;; TRAMP mode
-(setq tramp-default-method "ssh")
-
-;; Important to make it work
-(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
-;; Make C-c o the general key for switching windows
-(global-set-key (kbd "C-c o") 'other-window)
-
-
-;;---------------------------------------------------------------------
-;; Put auto 'custom' changes in a separate file (this is stuff like
-;; custom-set-faces and custom-set-variables)
-(load
- (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
- 'noerror)

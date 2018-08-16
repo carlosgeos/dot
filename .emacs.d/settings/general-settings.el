@@ -67,7 +67,7 @@
             ))
 
 (defun dired-dotfiles-toggle ()
-  "Show/hide dot-files"
+  "Show/hide dot-files."
   (interactive)
   (when (equal major-mode 'dired-mode)
     (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
@@ -135,9 +135,35 @@
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-; set command key to be meta instead of option
+;;---------------------------------------------------------------------
+;; Put auto 'custom' changes in a separate file (this is stuff like
+;; custom-set-faces and custom-set-variables)
+(load
+ (setq custom-file (expand-file-name "settings/custom.el" user-emacs-directory))
+ 'noerror)
+
+;; TRAMP mode
+(setq tramp-default-method "ssh")
+
+;; Important to make it work
+(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
+;; Make C-c o the general key for switching windows
+(global-set-key (kbd "C-c o") 'other-window)
+
+;; set command key to be meta instead of option
 (if (system-is-mac)
     (setq ns-command-modifier 'meta))
+
+;; https://emacs.stackexchange.com/questions/2105/how-do-i-disable-key-chord-mode-in-the-minibuffer
+(defun disable-key-chord-mode ()
+  "Solves [Display not ready] bug.
+For example when typing a partial keychord in minibuffer when
+looking for a file (C-c p f, helm projectile find file in
+project).  This way, key-chord is disabled in the minibuffer"
+  (set (make-local-variable 'input-method-function) nil))
+
+(add-hook 'minibuffer-setup-hook #'disable-key-chord-mode)
+
 
 (provide 'general-settings)
 ;;; general-settings.el ends here
