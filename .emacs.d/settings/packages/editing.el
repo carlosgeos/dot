@@ -77,10 +77,12 @@
   :ensure t
   :init
   (yas-global-mode 1)
-  ;; Remove Yasnippet's default tab key binding
-                                        ; (define-key yas-keymap (kbd "TAB") nil)
-                                        ; (define-key yas-keymap (kbd "<tab>") nil)
-  :bind (("C-c ;" . yas-expand)))
+  ;; Remove Yasnippet's default tab key binding. Does not work well
+  ;; with indenting and company mode.
+  :bind (:map yas-minor-mode-map
+              ("TAB" . nil)
+              ("<tab>" . nil)
+              ("C-c ;" . yas-expand)))
 
 (use-package yasnippet-snippets
   ;; yasnippet no longer ships with the snippets, hence this is also
