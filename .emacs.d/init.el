@@ -41,6 +41,7 @@
 (require 'custom-functions)
 ;; configure general settings
 (require 'general-settings)
+(require 'org-settings)
 (require 'use-package)
 (require 'major-modes)
 (require 'my-misc)
