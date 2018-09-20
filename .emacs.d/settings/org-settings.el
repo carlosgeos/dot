@@ -13,6 +13,9 @@
  'org-babel-load-languages
  '((python . t)))
 
+(use-package org-tree-slide
+  :ensure t)
+
 (provide 'org-settings)
 
 ;;; org-settings.el ends here
