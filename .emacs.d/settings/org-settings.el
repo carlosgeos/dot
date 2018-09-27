@@ -16,6 +16,11 @@
 (use-package org-tree-slide
   :ensure t)
 
+(use-package org-noter
+  :ensure t
+  :config
+  (setq org-noter-doc-split-fraction '(0.7 . 0.5)))
+
 (provide 'org-settings)
 
 ;;; org-settings.el ends here

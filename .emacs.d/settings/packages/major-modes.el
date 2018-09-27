@@ -109,4 +109,9 @@
   (setq deft-auto-save-interval 0))
 
 
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install))
+
 (provide 'major-modes)
