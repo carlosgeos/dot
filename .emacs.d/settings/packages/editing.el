@@ -2,12 +2,17 @@
 
 (use-package multiple-cursors
   ;; M-x calls to mc do not work well, keybindings are necessary
+  ;; iedit does a similar thing. Maybe this one is better ?
+  ;;
+  ;; mc is always asking if a certain M-x action is to be done for all
+  ;; cursors, annoying.
   :ensure t
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-a" . mc/mark-all-like-this)))
 
-(use-package avy                        ;(ace-jump-mode is dead)
+(use-package avy
+  ;; C-; conflicts with iedit (installed as a dependency of lispy)
   :ensure t
   :bind (("C-;" . avy-goto-word-1)
          ("C-c SPC" . avy-goto-char)))   ;FIXME: this is also clojure-align...
@@ -22,40 +27,15 @@
 (use-package paredit
   :ensure t)
 
-(use-package paxedit
-  ;; using transposing and deleting functions from paxedit, not
-  ;; smartparens
+(use-package lispy
+  ;; paxedit not as complete. smartparens does the same. lispy seems
+  ;; better
   :ensure t
   :init
-  ;; bindings in keychords
-  (key-chord-define-global "kk" 'paxedit-delete) ;nice sexp delete
-  :bind
-  (("M-<right>" . paxedit-transpose-forward)
-   ("M-<left>" . paxedit-transpose-backward)))
-
-(use-package smartparens
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook #'smartparens-mode)
-  (add-hook 'emacs-lisp-mode-hook #'smartparens-mode)
-  (add-hook 'common-lisp-mode-hook #'smartparens-mode)
-  (add-hook 'scheme-mode-hook #'smartparens-mode)
-  ;; LaTeX and HTML as well ??
-  :bind
-  (("M-(" . sp-wrap-round)
-   ("M-s" . sp-splice-sexp)
-   ("C-M-f" . sp-forward-sexp)
-   ("C-M-b" . sp-backward-sexp)
-   ("C-M-n" . sp-next-sexp)
-   ("C-M-p" . sp-previous-sexp)
-   ("C-M-d" . sp-down-sexp)
-   ("C-M-u" . sp-up-sexp)
-   ("C-<right>" . sp-forward-slurp-sexp)
-   ("C-<left>" . sp-backward-slurp-sexp)
-   ("C-M-<right>" . sp-forward-barf-sexp)
-   ("C-M-<left>" . sp-backward-barf-sexp)))
-;; TODO: config bindings to navigate through sexps. 'add-to-next-sexp'
-;; and similar are quite interesting as well
+  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
+  (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
+  :config
+  (add-to-list 'lispy-compat 'cider))
 
 (use-package helm
   :ensure t
