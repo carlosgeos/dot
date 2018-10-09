@@ -28,7 +28,6 @@
   :init
   (add-hook 'after-init-hook #'global-emojify-mode))
 
-(when (system-is-linux)
-  (set-face-attribute 'default (selected-frame) :height 140))
+(set-face-attribute 'default (selected-frame) :height 140)
 
 (provide 'appearance)
