@@ -112,6 +112,9 @@
 (use-package pdf-tools
   :ensure t
   :config
+  ;; this command will say `cant find brew` or something like that on
+  ;; macOS, just run (exec-path-from-shell-initialize) so emacs can
+  ;; find it.
   (pdf-tools-install))
 
 (provide 'major-modes)
