@@ -92,7 +92,14 @@
 ;; Maths, R, stats, etc
 
 (when (system-is-mac)
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs")
+  (autoload 'maxima-mode "maxima" "Maxima mod" t)
+  (autoload 'imaxima "imaxima" "Frontend for maxima with image support" t)
+  (autoload 'maxima "maxima" "Maxima interaction" t)
+  (autoload 'imath-mode "imath" "Imath mode for math formula support" t)
+  (setq imaxima-use-maxima-mode-flag t)
+  (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
+  (setq imaxima-fnt-size "large"))
 
 (use-package ess-site
   :ensure ess
