@@ -18,8 +18,9 @@
 
   :config
   ;; set python3 default
-  (setq python-shell-interpreter "python3")
-  (setq flycheck-python-pycompile-executable "python3"))
+  (setq flycheck-python-pycompile-executable "python3")
+  (setq flycheck-python-flake8-executable "python3")
+  (setq flycheck-python-pylint-executable "python3"))
 
 
 (provide 'linting)
