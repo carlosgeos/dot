@@ -23,7 +23,4 @@
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
 
-(use-package indium
-  :ensure t)
-
 (provide 'my-misc)

@@ -36,7 +36,6 @@
   "\\.phtml\\'"
   "\\.vue\\'"
   "\\.html\\'"
-  "\\.js\\'"
   "\\.tpl\\.php\\'"
   "\\.[agj]sp\\'"
   "\\.as[cp]x\\'"
@@ -53,6 +52,12 @@
                              (setq web-mode-markup-indent-offset 3)
                              (setq web-mode-code-indent-offset 2)
                              (setq web-mode-css-indent-offset 2))))
+
+(use-package js2-mode
+  :ensure t
+  :mode "\\.js\\'"
+  :config
+  (setq js2-basic-offset 2))
 
 (use-package typescript-mode
   :ensure t)
@@ -109,10 +114,6 @@
 (setq imaxima-fnt-size "large")
 (setq imaxima-pt-size 14)
 (setq imaxima-scale-factor 1.6)
-
-(use-package ess-site
-  :ensure ess
-  :disabled t)
 
 ;; Other
 
