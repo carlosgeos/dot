@@ -51,7 +51,8 @@
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
-  (setq helm-mode-fuzzy-match t))
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-ff-auto-update-initial-value t))
 
 (use-package yasnippet
   :ensure t
