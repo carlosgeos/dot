@@ -3,7 +3,11 @@
   :ensure t
   :init
   (when (system-is-mac)
-    (exec-path-from-shell-initialize)))
+    (exec-path-from-shell-initialize)
+    ;; ar and ranlib should come from LLVM and not GNU to be able to
+    ;; compile pdf-tools (true in Nov 2018)
+    (setenv "AR" "/usr/bin/ar")
+    (setenv "RANLIB" "/usr/bin/ranlib")))
 
 (use-package key-chord
   :ensure t
