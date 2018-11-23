@@ -22,9 +22,11 @@
 
 (setq display-buffer-alist '(("\\*YASnippet Tables\\*" display-buffer-same-window)
                              ("\\*Help\\*" display-buffer-same-window)
-                             ("\\*magit-diff\\:" display-buffer-same-window)
+                             ("\\*Process List\\*" display-buffer-same-window)
                              ("\\*Flycheck checkers\\*" display-buffer-same-window)
-                             ("\\*Process List\\*" display-buffer-same-window)))
+                             ("\\magit-diff\\:" display-buffer-in-atom-window)
+                             ;; The following is generated with the rx macro
+                             ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
