@@ -1,3 +1,6 @@
 [user]
 	name = Carlos Requena
 	email = crequena@ulb.ac.be
+	signingkey = 4CB485A19017472A
+[commit]
+	gpgsign = true
