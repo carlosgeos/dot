@@ -29,9 +29,12 @@
 .config/*
 !.config/i3
 !.config/i3status
-!.config/git
 !.config/fontconfig
 !.config/youtube-dl
+
+# --- git
+
+!.gitconfig
 
 # --- top config
 
