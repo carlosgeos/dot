@@ -12,7 +12,6 @@
          ("C-c C-a" . mc/mark-all-like-this)))
 
 (use-package avy
-  ;; C-; conflicts with iedit (installed as a dependency of lispy)
   :ensure t
   :bind (("C-;" . avy-goto-word-1)
          ("C-c SPC" . avy-goto-char)))   ;FIXME: this is also clojure-align...
@@ -22,20 +21,13 @@
   :ensure t
   :bind ("C-<return>" . er/expand-region))
 
-;; some functions are ok. global paredit mode is too strict configure
-;; wrapping of sexps
-(use-package paredit
-  :ensure t)
 
-(use-package lispy
-  ;; paxedit not as complete. smartparens does the same. lispy seems
-  ;; better
+(use-package paredit
   :ensure t
-  :init
-  (add-hook 'emacs-lisp-mode-hook (lambda () (lispy-mode 1)))
-  (add-hook 'clojure-mode-hook (lambda () (lispy-mode 1)))
-  :config
-  (add-to-list 'lispy-compat 'cider))
+  :hook ((emacs-lisp-mode clojure-mode) . paredit-mode)
+  ;; (add-hook 'emacs-lisp-mode-hook (lambda () (paredit-mode 1)))
+  ;; (add-hook 'clojure-mode-hook (lambda () (par-mode 1))))
+  )
 
 (use-package helm
   :ensure t
@@ -51,7 +43,9 @@
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
-  (setq helm-mode-fuzzy-match t))
+  (setq helm-mode-fuzzy-match t)
+  ;; Show full name in helm-mini
+  (setq helm-buffer-max-length nil))
 
 (use-package yasnippet
   :ensure t

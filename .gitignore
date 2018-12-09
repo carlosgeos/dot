@@ -36,16 +36,14 @@
 
 !.gitconfig
 
-# --- top config
-
-!.toprc
-
 # --- xinit, bash profile etc
 
 !.Xresources
 !.xinitrc
 !.bash_profile
 
-# --- rtorrent
+# --- Misc .rc files
 
+!.toprc
 !.rtorrent.rc
+!.npmrc

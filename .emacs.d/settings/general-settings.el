@@ -26,7 +26,10 @@
                              ("\\*Flycheck checkers\\*" display-buffer-same-window)
                              ("\\magit-diff\\:" display-buffer-in-atom-window)
                              ;; The following is generated with the rx macro
-                             ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)))
+                             ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
+                             ("\\*cider-error\\*" display-buffer-in-side-window)
+                             ("\\*Backtrace\\*" display-buffer-same-window)
+                             ("\\*Metahelp\\*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -60,37 +63,6 @@
 
 ;; human readable Dired buffer
 (setq dired-listing-switches "-alh")
-
-;; dired-x
-(add-hook 'dired-load-hook
-          (lambda ()
-            (load "dired-x")
-            ;; Set dired-x global variables here.  For example:
-            ;; (setq dired-guess-shell-gnutar "gtar")
-            ;; (setq dired-x-hands-off-my-keys nil)
-            ))
-
-(defun dired-dotfiles-toggle ()
-  "Show/hide dot-files."
-  (interactive)
-  (when (equal major-mode 'dired-mode)
-    (if (or (not (boundp 'dired-dotfiles-show-p)) dired-dotfiles-show-p) ; if currently showing
-        (progn
-          (set (make-local-variable 'dired-dotfiles-show-p) nil)
-          (message "h")
-          (dired-mark-files-regexp "^\\\.")
-          (dired-do-kill-lines))
-      (progn (revert-buffer) ; otherwise just revert to re-show
-             (set (make-local-variable 'dired-dotfiles-show-p) t)))))
-
-(add-hook 'dired-mode-hook
-          (lambda ()
-            ;; Set dired-x buffer-local variables here.  For example:
-            ;; (dired-omit-mode 1)
-            ;; (dired-dotfiles-toggle)
-            ))
-
-
 
 ;; electric brackets pair mode
 (add-hook 'prog-mode-hook #'electric-pair-mode)
