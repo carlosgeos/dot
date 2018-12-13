@@ -125,7 +125,6 @@
   (setq deft-directory "~/ownCloud/deft")
   (setq deft-auto-save-interval 0))
 
-
 (use-package pdf-tools
   :ensure t
   :config
@@ -133,5 +132,8 @@
   ;; macOS, just run (exec-path-from-shell-initialize) so emacs can
   ;; find it.
   (pdf-tools-install))
+
+(use-package cmake-mode
+  :ensure t)
 
 (provide 'major-modes)

@@ -29,7 +29,8 @@
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
                              ("\\*cider-error\\*" display-buffer-in-side-window)
                              ("\\*Backtrace\\*" display-buffer-same-window)
-                             ("\\*Metahelp\\*" display-buffer-same-window)))
+                             ("\\*Metahelp\\*" display-buffer-same-window)
+                             ("\\*Local variables\\*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
