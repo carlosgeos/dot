@@ -23,6 +23,12 @@
 .ssh/*
 !.ssh/config
 
+# --- gnupg config
+
+!.gnupg
+.gnupg/*
+!.gnupg/gpg-agent.conf
+
 # --- config files
 
 !.config
