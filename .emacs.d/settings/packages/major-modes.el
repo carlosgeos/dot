@@ -128,9 +128,9 @@
 (use-package pdf-tools
   :ensure t
   :config
-  ;; this command will say `cant find brew` or something like that on
-  ;; macOS, just run (exec-path-from-shell-initialize) so emacs can
-  ;; find it.
+  ;; macOS: to make retina display work, apply patch:
+  ;; https://gist.github.com/carlosgeos/3b540d09e35e99786b93465f918ad10d
+  ;; and check: https://github.com/politza/pdf-tools/issues/51
   (pdf-tools-install))
 
 (use-package cmake-mode
