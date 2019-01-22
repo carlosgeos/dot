@@ -179,18 +179,13 @@
 (global-set-key (kbd "C-c o") 'other-window)
 
 ;; set command key to be meta instead of option
-(if (system-is-mac)
-    (setq ns-command-modifier 'meta))
+(when (system-is-mac)
+  (setq ns-command-modifier 'meta)
+  ;; ar and ranlib should come from LLVM and not GNU to be able to
+  ;; compile pdf-tools on mac (true as of Jan 2019)
+  (setenv "AR" "/usr/bin/ar")
+  (setenv "RANLIB" "/usr/bin/ranlib"))
 
-;; https://emacs.stackexchange.com/questions/2105/how-do-i-disable-key-chord-mode-in-the-minibuffer
-(defun disable-key-chord-mode ()
-  "Solves [Display not ready] bug.
-For example when typing a partial keychord in minibuffer when
-looking for a file (C-c p f, helm projectile find file in
-project).  This way, key-chord is disabled in the minibuffer"
-  (set (make-local-variable 'input-method-function) nil))
-
-(add-hook 'minibuffer-setup-hook #'disable-key-chord-mode)
 (add-hook 'before-save-hook 'untabify-except-makefiles)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -476,7 +471,6 @@ project).  This way, key-chord is disabled in the minibuffer"
 (setq imaxima-pt-size 14)
 (setq imaxima-scale-factor 1.6)
 
-
 ;;; Misc
 
 (use-package restclient
@@ -499,17 +493,6 @@ project).  This way, key-chord is disabled in the minibuffer"
   ;; https://gist.github.com/carlosgeos/3b540d09e35e99786b93465f918ad10d
   ;; and check: https://github.com/politza/pdf-tools/issues/51
   (pdf-tools-install))
-
-;; Necessary to find PATH in macOS
-(use-package exec-path-from-shell
-  :ensure t
-  :init
-  (when (system-is-mac)
-    (exec-path-from-shell-initialize)
-    ;; ar and ranlib should come from LLVM and not GNU to be able to
-    ;; compile pdf-tools (true in Nov 2018)
-    (setenv "AR" "/usr/bin/ar")
-    (setenv "RANLIB" "/usr/bin/ranlib")))
 
 ;;; Appearance
 
