@@ -93,7 +93,7 @@
 ;; but whatever
 (windmove-default-keybindings)
 
-;; always open these buffers in current buffer. Buffer strings should
+;; always open these buffers in said buffer. Buffer strings should
 ;; be regexes
 (setq display-buffer-alist '(("\\*YASnippet Tables\\*" display-buffer-same-window)
                              ("\\*Help\\*" display-buffer-same-window)
@@ -102,10 +102,14 @@
                              ("\\magit-diff\\:" display-buffer-in-atom-window)
                              ;; The following is generated with the rx macro
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
-                             ("\\*cider-error\\*" display-buffer-in-side-window)
                              ("\\*Backtrace\\*" display-buffer-same-window)
                              ("\\*Metahelp\\*" display-buffer-same-window)
-                             ("\\*Local variables\\*" display-buffer-same-window)))
+                             ("\\*Local variables\\*" display-buffer-same-window)
+                             ;; Same window does not work for cider
+                             ;; so, open in side-window (which is a
+                             ;; bit better
+                             ("\\*cider-error\\*" display-buffer-in-side-window)
+                             ("\\*cider-doc\\*" display-buffer-in-side-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
