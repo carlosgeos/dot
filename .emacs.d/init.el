@@ -89,9 +89,11 @@
 ;; no scroll bar
 (scroll-bar-mode -1)
 
-;; use arrows + shift to move around split windows. not very useful
-;; but whatever
-(windmove-default-keybindings)
+;; Quick keybindings to resize windows
+(global-set-key (kbd "S-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-<down>") 'shrink-window)
+(global-set-key (kbd "S-<up>") 'enlarge-window)
 
 ;; always open these buffers in said buffer. Buffer strings should
 ;; be regexes
@@ -117,8 +119,7 @@
 ;; Move files to trash when deleting
 (setq delete-by-moving-to-trash t)
 
-;; Do not use shift to select stuff. Wouldn't work since
-;; windmove-default-keybindings is activated anyway...
+;; Do not use shift to select stuff
 (setq shift-select-mode nil)
 
 ;; no tool bar
@@ -326,6 +327,10 @@
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
 
+(use-package indium
+  :ensure t
+  :hook (js2-mode . indium-interaction-mode))
+
 (use-package multiple-cursors
   ;; M-x calls to mc do not work well, keybindings are necessary
   ;; iedit does a similar thing. Maybe this one is better ?
@@ -342,6 +347,12 @@
   :bind (("C-;" . avy-goto-word-1)
          ("C-c SPC" . avy-goto-char)))   ;FIXME: this is also clojure-align...
 ;; There are a lot more binds to set for avy!
+
+(use-package ace-window
+  :ensure t
+  :init
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind ("M-o" . ace-window))
 
 (use-package expand-region
   :ensure t
