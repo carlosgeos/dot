@@ -239,6 +239,7 @@
 
   :mode
   "\\.phtml\\'"
+  "\\.jsx\\'"
   "\\.vue\\'"
   "\\.html\\'"
   "\\.tpl\\.php\\'"
@@ -265,9 +266,6 @@
   (setq js2-basic-offset 2))
 
 (use-package typescript-mode
-  :ensure t)
-
-(use-package rjsx-mode
   :ensure t)
 
 ;; Markup, style, data and build tools
