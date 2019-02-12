@@ -76,6 +76,22 @@
   (unless (derived-mode-p 'makefile-mode)
     (untabify (point-min) (point-max))))
 
+(add-hook 'before-save-hook 'untabify-except-makefiles)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(defun slick-copy (beg end)
+  "Advice for 'kill-ring-save'.
+
+It copies the current line if no region is selected.  BEG and END
+are parameters of 'kill-ring-save'."
+  (interactive
+   (if mark-active
+       (list (region-beginning) (region-end))
+     (message "Copied line")
+     (list (line-beginning-position) (line-beginning-position 2)))))
+
+(advice-add 'kill-ring-save :before #'slick-copy)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; General stuff ;;
 ;;;;;;;;;;;;;;;;;;;
@@ -190,9 +206,6 @@
   ;; compile pdf-tools on mac (true as of Jan 2019)
   (setenv "AR" "/usr/bin/ar")
   (setenv "RANLIB" "/usr/bin/ranlib"))
-
-(add-hook 'before-save-hook 'untabify-except-makefiles)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;;;;;;;;;;;;;;;;;;
 ;; Org settings ;;
