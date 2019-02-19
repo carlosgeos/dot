@@ -221,14 +221,15 @@ are parameters of 'kill-ring-save'."
 (use-package org-noter
   :ensure t
   :config
-  ;; make the pdf side take a bit more space than half the screen
+  ;; sizing adjustments depending on the screen used
   (when (system-is-linux)
-    (setq org-noter-doc-split-fraction '(0.7 . 0.5)))
+    (setq org-noter-doc-split-fraction '(0.7 . 0.5))
+    (plist-put org-format-latex-options :scale 2.0))
   (when (system-is-mac)
-    (setq org-noter-doc-split-fraction '(0.6 . 0.5)))
-  ;; make embedded latex appear larger, 1.8 works well
-  (plist-put org-format-latex-options :scale 1.8)
-  (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill))
+    (setq org-noter-doc-split-fraction '(0.55 . 0.5))
+    (plist-put org-format-latex-options :scale 1.3))
+  (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill)
+  (setq org-preview-latex-image-directory "~/.lxtimg/"))
 
 
 ;;;;;;;;;;;;;;;;;;;
@@ -540,8 +541,8 @@ are parameters of 'kill-ring-save'."
   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
-(set-face-attribute 'default (selected-frame) :height 140)
-
+;;; Increase font size
+(set-face-attribute 'default nil :height 140)
 
 (provide 'init)
 
