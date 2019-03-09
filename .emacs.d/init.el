@@ -132,6 +132,9 @@ are parameters of 'kill-ring-save'."
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
+;; Highline cursorline mode
+(global-hl-line-mode)
+
 ;; Move files to trash when deleting
 (setq delete-by-moving-to-trash t)
 
@@ -280,6 +283,11 @@ are parameters of 'kill-ring-save'."
   (setq js2-basic-offset 2))
 
 (use-package typescript-mode
+  :ensure t
+  :init
+  (add-hook 'typescript-mode-hook (lambda () (tide-setup) (tide-hl-identifier-mode +1))))
+
+(use-package tide
   :ensure t)
 
 ;; Markup, style, data and build tools
