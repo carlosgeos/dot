@@ -290,6 +290,9 @@ are parameters of 'kill-ring-save'."
 (use-package tide
   :ensure t)
 
+(use-package dockerfile-mode
+  :ensure t)
+
 ;; Markup, style, data and build tools
 
 (use-package tex-site
