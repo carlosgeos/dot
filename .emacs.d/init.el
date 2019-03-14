@@ -257,6 +257,7 @@ are parameters of 'kill-ring-save'."
   :mode
   "\\.phtml\\'"
   "\\.jsx\\'"
+  "\\.json\\'"
   "\\.vue\\'"
   "\\.html\\'"
   "\\.tpl\\.php\\'"
