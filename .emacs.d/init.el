@@ -235,6 +235,8 @@ are parameters of 'kill-ring-save'."
   (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill)
   (setq org-preview-latex-image-directory "~/.lxtimg/"))
 
+(use-package edit-indirect
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Editing modes ;;
