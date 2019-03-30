@@ -92,6 +92,16 @@ are parameters of 'kill-ring-save'."
 
 (advice-add 'kill-ring-save :before #'slick-copy)
 
+(defun indent-buffer ()
+  "Indent an entire buffer using the default intenting scheme."
+  (interactive)
+  (save-excursion
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)))
+
+
+(global-set-key (kbd "C-x \\") 'indent-buffer)
+
 ;;;;;;;;;;;;;;;;;;;
 ;; General stuff ;;
 ;;;;;;;;;;;;;;;;;;;
