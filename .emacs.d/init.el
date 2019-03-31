@@ -207,17 +207,17 @@ are parameters of 'kill-ring-save'."
  'noerror)
 
 ;; TRAMP mode
-(setq tramp-default-method "ssh")
+(customize-set-variable 'tramp-default-method "ssh")
 
 ;; Important to make it work
-(setq tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
+(customize-set-variable 'tramp-auto-save-directory "~/.emacs.d/tramp-autosave")
 
 ;; Make C-c o another key for switching windows
 (global-set-key (kbd "C-c o") 'other-window)
 
 ;; set command key to be meta instead of option
 (when (system-is-mac)
-  (setq ns-command-modifier 'meta)
+  (customize-set-variable 'ns-command-modifier 'meta)
   ;; ar and ranlib should come from LLVM and not GNU to be able to
   ;; compile pdf-tools on mac (true as of Jan 2019)
   (setenv "AR" "/usr/bin/ar")
@@ -426,9 +426,9 @@ are parameters of 'kill-ring-save'."
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
-  (setq helm-mode-fuzzy-match t)
+  (customize-set-variable 'helm-mode-fuzzy-match t)
   ;; Show full name in helm-mini
-  (setq helm-buffer-max-length nil))
+  (customize-set-variable 'helm-buffer-max-length nil))
 
 (use-package yasnippet
   :ensure t
@@ -459,8 +459,8 @@ are parameters of 'kill-ring-save'."
   :config
   (setq company-idle-delay 0.1))
 
-(add-to-list 'company-backends 'company-c-headers)
 (add-to-list 'company-backends 'company-irony)
+(add-to-list 'company-backends 'company-c-headers)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -473,31 +473,17 @@ are parameters of 'kill-ring-save'."
 
 (use-package projectile
   :ensure t
-  :init
-  ;; Workaround laggy emacs editor
-  ;; see https://github.com/bbatsov/projectile/issues/1183
-  (setq projectile-keymap-prefix (kbd "C-c p"))
-  (setq projectile-completion-system 'helm)
-  (setq projectile-mode-line
-        '(:eval (format " Projectile[%s]"
-                        (projectile-project-name))))
   :config
-  (projectile-global-mode))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-mode-line-function
+        '(lambda () (format " Proj[%s]" (projectile-project-name))))
+  (projectile-mode +1))
 
 (use-package helm-projectile
   :ensure t
   :config
   (helm-projectile-on))
-
-(use-package helm-gtags
-  :ensure t
-  :bind (("M-." . helm-gtags-dwim))
-  :init
-  (setq helm-gtags-auto-update t)
-  :config
-  (add-hook 'c-mode-hook 'helm-gtags-mode)
-  (add-hook 'c++-mode-hook 'helm-gtags-mode)
-  (add-hook 'asm-mode-hook 'helm-gtags-mode))
 
 (use-package magit
   :ensure t
@@ -509,11 +495,19 @@ are parameters of 'kill-ring-save'."
 (use-package flycheck
   :ensure t
   :config
-  ;; Unless flycheck-add-next-checker is configured, flycheck will
-  ;; only use the first checker in the chain.
   (setq flycheck-python-pycompile-executable "python3")
   (setq flycheck-python-flake8-executable "flake8")
   (setq flycheck-python-pylint-executable "pylint")
+
+  ;; Chain checkers together
+  ;; Python
+  (flycheck-add-next-checker 'python-flake8 'python-pylint t)
+  (flycheck-add-next-checker 'python-pylint 'python-pycompile t)
+  ;; TS
+  (flycheck-add-next-checker 'typescript-tide 'typescript-tslint t)
+  ;; C/C++
+  (flycheck-add-next-checker 'irony 'c/c++-cppcheck t)
+
   ;; irony-setup simply adds irony to flycheck-checkers
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
