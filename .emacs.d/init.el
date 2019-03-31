@@ -127,6 +127,7 @@ are parameters of 'kill-ring-save'."
                              ("\\*Help\\*" display-buffer-same-window)
                              ("\\*Process List\\*" display-buffer-same-window)
                              ("\\*Flycheck checkers\\*" display-buffer-same-window)
+                             ("\\*Flycheck checker\\*" display-buffer-same-window)
                              ("\\magit-diff\\:" display-buffer-in-atom-window)
                              ;; The following is generated with the rx macro
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
@@ -195,6 +196,8 @@ are parameters of 'kill-ring-save'."
 (make-directory autosave-dir t)
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+(add-to-list 'exec-path "~/.local/bin")
 
 ;;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
@@ -352,10 +355,20 @@ are parameters of 'kill-ring-save'."
 (use-package cmake-mode
   :ensure t)
 
-
 ;;;;;;;;;;;;;;;;;;;;
 ;; Other packages ;;
 ;;;;;;;;;;;;;;;;;;;;
+
+(use-package irony-eldoc
+  :ensure t)
+
+(use-package irony
+  :ensure t
+  :config
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'c-mode-hook 'irony-mode)
+  (add-hook 'irony-mode-hook #'irony-eldoc)
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package cider
   :ensure t
@@ -433,12 +446,21 @@ are parameters of 'kill-ring-save'."
   ;; necessary
   :ensure t)
 
+(use-package company-c-headers
+  :ensure t)
+
+(use-package company-irony
+  :ensure t)
+
 (use-package company
   :ensure t
   :init
   (global-company-mode)
   :config
   (setq company-idle-delay 0.1))
+
+(add-to-list 'company-backends 'company-c-headers)
+(add-to-list 'company-backends 'company-irony)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -481,27 +503,23 @@ are parameters of 'kill-ring-save'."
   :ensure t
   :bind ("C-x g" . magit-status))
 
+(use-package flycheck-irony
+  :ensure t)
+
 (use-package flycheck
   :ensure t
-  :init
-  (add-hook 'prog-mode-hook #'flycheck-mode)
-
-  ;; SHOULD BE DONE ON A PER PROJECT BASIS WITH DIR LOCALS
-  ;; (setq-default flycheck-disabled-checkers '(c/c++-clang))
-  ;; (setq-default flycheck-gcc-warnings '("pedantic" "all" "extra" "conversion" "effc++" "strict-null-sentinel" "old-style-cast" "noexcept" "ctor-dtor-privacy" "overloaded-virtual" "sign-promo" "zero-as-null-pointer-constant" "suggest-final-types" "suggest-final-methods" "suggest-override"))
-  (add-hook 'c++-mode-hook
-            (lambda ()
-              (setq flycheck-gcc-language-standard "c++14")
-              (if (system-is-mac)
-                  (setq flycheck-c/c++-gcc-executable "clang++"))
-              (flycheck-select-checker 'c/c++-gcc)));it does not interfere with c mode.
-
-
   :config
-  ;; set python3 default
+  ;; Unless flycheck-add-next-checker is configured, flycheck will
+  ;; only use the first checker in the chain.
   (setq flycheck-python-pycompile-executable "python3")
-  (setq flycheck-python-flake8-executable "python3")
-  (setq flycheck-python-pylint-executable "python3"))
+  (setq flycheck-python-flake8-executable "flake8")
+  (setq flycheck-python-pylint-executable "pylint")
+  ;; irony-setup simply adds irony to flycheck-checkers
+  (eval-after-load 'flycheck
+    '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+  ;; Activate flycheck in prog mode
+  (add-hook 'prog-mode-hook #'flycheck-mode))
 
 ;; Maths, R, stats, etc
 
@@ -513,7 +531,7 @@ are parameters of 'kill-ring-save'."
   ;; work but it wants to install Emacs 24.
   (add-to-list 'load-path "/usr/local/share/imaxima/"))
 
-(autoload 'maxima-mode "maxima" "Maxima mod" t)
+(autoload 'maxima-mode "maxima" "Maxima mode" t)
 (autoload 'imaxima "imaxima" "Frontend for maxima with image support" t)
 (autoload 'maxima "maxima" "Maxima interaction" t)
 (autoload 'imath-mode "imath" "Imath mode for math formula support" t)
