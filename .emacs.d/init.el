@@ -322,7 +322,9 @@ are parameters of 'kill-ring-save'."
   :ensure t
   :mode
   "\\.markdown\\'"
-  "\\.md\\'")
+  "\\.md\\'"
+  :config
+  (setq markdown-command "pandoc"))
 
 (use-package sphinx-doc
   :ensure t
