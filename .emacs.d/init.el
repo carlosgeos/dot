@@ -518,7 +518,7 @@ are parameters of 'kill-ring-save'."
 ;; Maths, R, stats, etc
 
 (when (system-is-mac)
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.41.0/share/maxima/5.41.0/emacs"))
+  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.42.2/share/maxima/5.42.2/emacs"))
 (when (system-is-linux)
   ;; this folder is a copy of the one found in macOS and put under
   ;; this path (it works). The debian package maxima-emacs would also
