@@ -489,7 +489,9 @@ are parameters of 'kill-ring-save'."
 
 (use-package magit
   :ensure t
-  :bind ("C-x g" . magit-status))
+  :bind ("C-x g" . magit-status)
+  :config
+  (setq transient-default-level 5))
 
 (use-package flycheck-irony
   :ensure t)
