@@ -493,6 +493,10 @@ are parameters of 'kill-ring-save'."
   :config
   (setq transient-default-level 5))
 
+(use-package kubernetes
+  :ensure t
+  :bind ("C-x t" . kubernetes-overview))
+
 (use-package flycheck-irony
   :ensure t)
 
