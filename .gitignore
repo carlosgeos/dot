@@ -3,19 +3,11 @@
 
 ## Files not ignored
 
-!.gitignore
-
 # --- Emacs configuration files
 
 !.emacs.d
 .emacs.d/*
 !.emacs.d/init.el
-.emacs.d/settings/custom.el
-!.emacs.d/settings/
-!.emacs.d/keybindings/
-!.emacs.d/eshell
-.emacs.d/eshell/*
-!.emacs.d/eshell/alias
 
 # --- ssh config
 
@@ -33,23 +25,15 @@
 
 !.config
 .config/*
-!.config/i3
-!.config/i3status
 !.config/fontconfig
 !.config/youtube-dl
 
 # --- git
 
 !.gitconfig
-
-# --- xinit, bash profile etc
-
-!.Xresources
-!.xinitrc
-!.bash_profile
+!.gitignore
 
 # --- Misc .rc files
 
 !.toprc
 !.rtorrent.rc
-!.npmrc
