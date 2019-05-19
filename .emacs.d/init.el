@@ -555,7 +555,7 @@ are parameters of 'kill-ring-save'."
   :bind ("<f8>" . deft)
   :init
   (setq deft-extensions '("org" "txt"))
-  (setq deft-directory "~/ownCloud/deft")
+  (setq deft-directory "~/Nextcloud/deft")
   (setq deft-auto-save-interval 0))
 
 (use-package pdf-tools
