@@ -58,6 +58,11 @@
 
 (require 'use-package)
 
+(use-package exec-path-from-shell
+  :ensure t
+  :init
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper functions ;;
@@ -197,8 +202,6 @@ are parameters of 'kill-ring-save'."
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-(add-to-list 'exec-path "~/.local/bin")
-
 ;;---------------------------------------------------------------------
 ;; Put auto 'custom' changes in a separate file (this is stuff like
 ;; custom-set-faces and custom-set-variables)
@@ -251,7 +254,11 @@ are parameters of 'kill-ring-save'."
 (use-package epresent
   :ensure t
   :config
-  (setq epresent-text-scale 200))
+  ;; Adapt font sizes to laptop screen for presentations
+  (setq epresent-text-scale 300)
+  (set-face-attribute 'epresent-title-face nil :inherit 'variable-pitch :underline t :weight 'bold :height 800)
+  (set-face-attribute 'epresent-subheading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 440)
+  (set-face-attribute 'epresent-heading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 600))
 
 (use-package edit-indirect
   :ensure t)
