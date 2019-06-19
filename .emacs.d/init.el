@@ -256,6 +256,7 @@ are parameters of 'kill-ring-save'."
   :config
   ;; Adapt font sizes to laptop screen for presentations
   (setq epresent-text-scale 300)
+  (setq epresent-format-latex-scale 3)
   (set-face-attribute 'epresent-title-face nil :inherit 'variable-pitch :underline t :weight 'bold :height 800)
   (set-face-attribute 'epresent-subheading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 440)
   (set-face-attribute 'epresent-heading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 600))
