@@ -370,6 +370,9 @@ are parameters of 'kill-ring-save'."
 (use-package cmake-mode
   :ensure t)
 
+(use-package gmpl-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;
 ;; Other packages ;;
 ;;;;;;;;;;;;;;;;;;;;
