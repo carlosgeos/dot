@@ -38,10 +38,14 @@
 (setq package-list '(use-package))
 (setq load-prefer-newer t)
 
+;;; Workaround for
+;;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341, disabling TLS
+;;; 1.3 to access ELPA
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 ;; The good repo
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/")
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
 
@@ -50,7 +54,8 @@
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
 
-;; Install use-package before anything else
+;; Install the initial package-list before anything else (contains
+;; use-package)
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-refresh-contents)
