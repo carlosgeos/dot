@@ -69,6 +69,10 @@
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
 
+;; System LANG variable is probably broken, so fix it with:
+(setenv "LANG" "en_US.UTF-8")
+(set-language-environment "Latin-1")
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper functions ;;
 ;;;;;;;;;;;;;;;;;;;;;;
@@ -544,25 +548,16 @@ are parameters of 'kill-ring-save'."
   ;; Activate flycheck in prog mode
   (add-hook 'prog-mode-hook #'flycheck-mode))
 
-;; Maths, R, stats, etc
-
-(when (system-is-mac)
-  (add-to-list 'load-path "/usr/local/Cellar/maxima/5.42.2/share/maxima/5.42.2/emacs"))
-(when (system-is-linux)
-  ;; this folder is a copy of the one found in macOS and put under
-  ;; this path (it works). The debian package maxima-emacs would also
-  ;; work but it wants to install Emacs 24.
-  (add-to-list 'load-path "/usr/local/share/imaxima/"))
+;; Maxima CAS
 
 (autoload 'maxima-mode "maxima" "Maxima mode" t)
 (autoload 'imaxima "imaxima" "Frontend for maxima with image support" t)
 (autoload 'maxima "maxima" "Maxima interaction" t)
 (autoload 'imath-mode "imath" "Imath mode for math formula support" t)
-(setq imaxima-use-maxima-mode-flag t)
 (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
-(setq imaxima-fnt-size "large")
-(setq imaxima-pt-size 14)
-(setq imaxima-scale-factor 1.6)
+(setq imaxima-scale-factor 2)
+(when (system-is-mac)
+  (setq imaxima-scale-factor 1.3))
 
 ;;; Misc
 
