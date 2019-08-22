@@ -33,6 +33,10 @@
 !.gitconfig
 !.gitignore
 
+# --- nano
+
+!.nanorc
+
 # --- Misc .rc files
 
 !.toprc
