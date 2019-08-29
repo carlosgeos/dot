@@ -71,7 +71,7 @@
 
 ;; System LANG variable is probably broken, so fix it with:
 (setenv "LANG" "en_US.UTF-8")
-(set-language-environment "Latin-1")
+(set-language-environment "UTF-8")
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; Helper functions ;;
