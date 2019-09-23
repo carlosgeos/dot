@@ -233,8 +233,7 @@ are parameters of 'kill-ring-save'."
   ;; ar and ranlib should come from LLVM and not GNU to be able to
   ;; compile pdf-tools on mac (true as of Jan 2019)
   (setenv "AR" "/usr/bin/ar")
-  (setenv "RANLIB" "/usr/bin/ranlib")
-  (setenv "PKG_CONFIG_PATH" "/usr/local/lib/pkgconfig:/usr/local/Cellar/libffi/3.2.1/lib/pkgconfig"))
+  (setenv "RANLIB" "/usr/bin/ranlib"))
 
 ;;;;;;;;;;;;;;;;;;
 ;; Org settings ;;
