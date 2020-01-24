@@ -293,7 +293,6 @@ are parameters of 'kill-ring-save'."
 
   :mode
   "\\.phtml\\'"
-  "\\.jsx\\'"
   "\\.json\\'"
   "\\.vue\\'"
   "\\.html\\'"
@@ -319,6 +318,9 @@ are parameters of 'kill-ring-save'."
   :mode "\\.js\\'"
   :config
   (setq js2-basic-offset 2))
+
+(use-package rjsx-mode
+  :ensure t)
 
 (use-package typescript-mode
   :ensure t
