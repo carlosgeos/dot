@@ -152,7 +152,9 @@ are parameters of 'kill-ring-save'."
                              ;; so, open in side-window (which is a
                              ;; bit better
                              ("\\*cider-error\\*" display-buffer-in-side-window)
-                             ("\\*cider-doc\\*" display-buffer-in-side-window)))
+                             ("\\*cider-doc\\*" display-buffer-in-side-window)
+                             ;; Open ESS help in same window
+                             ("\\*help.*\\*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -404,6 +406,14 @@ are parameters of 'kill-ring-save'."
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
+
+(use-package ess
+  ;; ESS needs aggressive scroll on the inferior interactive
+  ;; REPL. It's set as a buffer-local variable
+  :ensure t
+  :init (require 'ess-site)
+  :hook (inferior-ess-mode . (lambda ()
+                               (setq scroll-down-aggressively 1.0))))
 
 (use-package indium
   :ensure t
