@@ -567,6 +567,10 @@ are parameters of 'kill-ring-save'."
 (autoload 'imath-mode "imath" "Imath mode for math formula support" t)
 (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
 (setq imaxima-scale-factor 2)
+;;; Maxima mode will send lines for evaluation to the *maxima*
+;;; buffer. This flag makes the *maxima* buffer use imaxima under the
+;;; hood. M-x imaxima should be run first though !
+(setq imaxima-use-maxima-mode-flag t)
 (when (system-is-mac)
   (setq imaxima-scale-factor 1.3))
 
