@@ -149,7 +149,9 @@ are parameters of 'kill-ring-save'."
                              ("\\*cider-error\\*" display-buffer-in-side-window)
                              ("\\*cider-doc\\*" display-buffer-in-side-window)
                              ;; Open ESS help in same window
-                             ("\\*help.*\\*" display-buffer-same-window)))
+                             ("\\*help.*\\*" display-buffer-same-window)
+                             ;; Python interpreter window. Open by Elpy
+                             ("\\*Python\\*" display-buffer-in-side-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -277,7 +279,9 @@ are parameters of 'kill-ring-save'."
 
 (use-package clojure-mode
   :ensure t
-  :hook (clojure-mode . subword-mode))
+  :hook (clojure-mode . subword-mode)
+  :config
+  (require 'flycheck-clj-kondo))
 
 (use-package groovy-mode
   :ensure t)
@@ -401,6 +405,14 @@ are parameters of 'kill-ring-save'."
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
+
+(use-package elpy
+  :ensure t
+  :init
+  (setq python-shell-interpreter "python3")
+  (setq python-shell-interpreter-args "-i")
+  (elpy-enable)
+  :config)
 
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
@@ -531,17 +543,13 @@ are parameters of 'kill-ring-save'."
 (use-package flycheck-irony
   :ensure t)
 
+(use-package flycheck-clj-kondo
+  :ensure t)
+
 (use-package flycheck
   :ensure t
   :config
-  (setq flycheck-python-pycompile-executable "python3")
-  (setq flycheck-python-flake8-executable "flake8")
-  (setq flycheck-python-pylint-executable "pylint")
-
   ;; Chain checkers together
-  ;; Python
-  (flycheck-add-next-checker 'python-flake8 'python-pylint t)
-  (flycheck-add-next-checker 'python-pylint 'python-pycompile t)
   ;; TS
   (flycheck-add-next-checker 'typescript-tide 'typescript-tslint t)
   ;; C/C++
