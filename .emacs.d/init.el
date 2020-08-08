@@ -150,6 +150,9 @@ are parameters of 'kill-ring-save'."
                              ("\\*cider-doc\\*" display-buffer-in-side-window)
                              ;; Open ESS help in same window
                              ("\\*help.*\\*" display-buffer-same-window)
+                             ;; Open ESS R repl in side window
+                             ("\\*R:~\\*" display-buffer-use-some-window
+                              display-buffer-pop-up-window (inhibit-same-window . t))
                              ;; Python interpreter window. Open by Elpy
                              ("\\*Python\\*" display-buffer-in-side-window)))
 
