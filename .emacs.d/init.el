@@ -115,6 +115,9 @@ are parameters of 'kill-ring-save'."
 ;; General stuff ;;
 ;;;;;;;;;;;;;;;;;;;
 
+;; start window maximised
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
 ;; no startup message
 (setq inhibit-startup-message t)
 
