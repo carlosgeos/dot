@@ -247,6 +247,16 @@ are parameters of 'kill-ring-save'."
 (require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
 
+(setq org-agenda-files '("~/Nextcloud/agenda.org"))
+(setq org-agenda-start-on-weekday 1)
+(setq calendar-week-start-day 1)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+(setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+                           (?B . (:foreground "cyan"))
+                           (?C . (:foreground "green"))))
+(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)))
