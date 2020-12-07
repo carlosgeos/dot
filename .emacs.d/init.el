@@ -255,6 +255,10 @@ are parameters of 'kill-ring-save'."
 (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
                            (?B . (:foreground "cyan"))
                            (?C . (:foreground "green"))))
+(setq org-todo-keyword-faces
+      '(("REVIEW" . "#A875FF")
+        ("ON_HOLD" . "#F81C07")))
+
 (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 
 (org-babel-do-load-languages
