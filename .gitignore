@@ -27,6 +27,7 @@
 .config/*
 !.config/fontconfig
 !.config/youtube-dl
+!.config/flake8
 
 # --- git
 

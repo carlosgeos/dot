@@ -432,7 +432,8 @@ are parameters of 'kill-ring-save'."
   (setq python-shell-interpreter "python3")
   (setq python-shell-interpreter-args "-i")
   (elpy-enable)
-  :config)
+  :config
+  (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules)))
 
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
