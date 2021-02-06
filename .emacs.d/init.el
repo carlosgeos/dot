@@ -631,6 +631,9 @@ are parameters of 'kill-ring-save'."
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
+(use-package undo-tree
+  :ensure t)
+
 (use-package aggressive-indent
   :ensure t
   :init
