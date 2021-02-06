@@ -639,8 +639,6 @@ are parameters of 'kill-ring-save'."
   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
-;;; Increase font size
-(set-face-attribute 'default nil :height 140)
 
 (provide 'init)
 
