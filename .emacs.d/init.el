@@ -140,7 +140,9 @@ are parameters of 'kill-ring-save'."
                              ("\\*Process List\\*" display-buffer-same-window)
                              ("\\*Flycheck checkers\\*" display-buffer-same-window)
                              ("\\*Flycheck checker\\*" display-buffer-same-window)
+                             ("\\*xref\\*" display-buffer-same-window)
                              ("\\magit-diff\\:" display-buffer-in-atom-window)
+                             ("\\magit-revision\\:" display-buffer-same-window)
                              ;; The following is generated with the rx macro
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
                              ("\\*Backtrace\\*" display-buffer-same-window)
@@ -278,18 +280,13 @@ are parameters of 'kill-ring-save'."
   (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill)
   (setq org-preview-latex-image-directory "~/.lxtimg/"))
 
-(use-package epresent
+(use-package org-tree-slide
   :ensure t
-  :config
-  ;; Adapt font sizes to laptop screen for presentations
-  (setq epresent-text-scale 300)
-  (setq epresent-format-latex-scale 3)
-  (set-face-attribute 'epresent-title-face nil :inherit 'variable-pitch :underline t :weight 'bold :height 800)
-  (set-face-attribute 'epresent-subheading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 440)
-  (set-face-attribute 'epresent-heading-face nil :inherit 'variable-pitch :underline nil :weight 'bold :height 600))
+  :custom
+  (org-image-actual-width nil))
 
-(use-package edit-indirect
-  :ensure t)
+;; (use-package edit-indirect
+;;   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Editing modes ;;
@@ -404,6 +401,9 @@ are parameters of 'kill-ring-save'."
 (use-package gmpl-mode
   :ensure t)
 
+(use-package terraform-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;
 ;; Other packages ;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -426,14 +426,13 @@ are parameters of 'kill-ring-save'."
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
 
-(use-package elpy
+(use-package anaconda-mode
   :ensure t
   :init
   (setq python-shell-interpreter "python3")
-  (setq python-shell-interpreter-args "-i")
-  (elpy-enable)
   :config
-  (setq elpy-modules (delq 'elpy-module-highlight-indentation elpy-modules)))
+  (add-hook 'python-mode-hook 'anaconda-mode)
+  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
@@ -518,6 +517,9 @@ are parameters of 'kill-ring-save'."
 (use-package company-irony
   :ensure t)
 
+(use-package company-anaconda
+  :ensure t)
+
 (use-package company
   :ensure t
   :init
@@ -527,6 +529,7 @@ are parameters of 'kill-ring-save'."
 
 (add-to-list 'company-backends 'company-irony)
 (add-to-list 'company-backends 'company-c-headers)
+(add-to-list 'company-backends 'company-anaconda)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -579,6 +582,11 @@ are parameters of 'kill-ring-save'."
   ;; irony-setup simply adds irony to flycheck-checkers
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+  (setq flycheck-python-pylint-executable "python3")
+
+  ;; PyCheckers
+  ;; (eval-after-load 'flycheck
+  ;;   '(add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
   ;; Activate flycheck in prog mode
   (add-hook 'prog-mode-hook #'flycheck-mode))

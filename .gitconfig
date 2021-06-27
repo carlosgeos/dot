@@ -1,7 +1,7 @@
 [user]
 	name = Carlos Requena López
-	email = Carlos.Requena.Lopez@ulb.be
-	signingkey = 8D0DC4A78F4D067B
+	email = carlos@requena-lopez.com
+	signingkey = 4CB485A19017472A
 [commit]
 	gpgsign = true
 [core]
