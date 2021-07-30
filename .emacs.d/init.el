@@ -141,7 +141,8 @@ are parameters of 'kill-ring-save'."
                              ("\\*Flycheck checkers\\*" display-buffer-same-window)
                              ("\\*Flycheck checker\\*" display-buffer-same-window)
                              ("\\*xref\\*" display-buffer-same-window)
-                             ("\\magit-diff\\:" display-buffer-in-atom-window)
+                             ("\\magit-diff\\:" display-buffer-use-some-window
+                              display-buffer-pop-up-window (inhibit-same-window . t))
                              ("\\magit-revision\\:" display-buffer-same-window)
                              ;; The following is generated with the rx macro
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
