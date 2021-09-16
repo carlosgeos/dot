@@ -160,7 +160,9 @@ are parameters of 'kill-ring-save'."
                              ("\\*R:~\\*" display-buffer-use-some-window
                               display-buffer-pop-up-window (inhibit-same-window . t))
                              ;; Python interpreter window. Open by Elpy
-                             ("\\*Python\\*" display-buffer-in-side-window)))
+                             ("\\*Python\\*" display-buffer-in-side-window)
+                             ("\\*grep.*\\*" display-buffer-same-window)
+                             ("\\*ag search.*\\*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -405,6 +407,29 @@ are parameters of 'kill-ring-save'."
 (use-package terraform-mode
   :ensure t)
 
+;;;;;;;;;;;;;;
+;; LSP mode ;;
+;;;;;;;;;;;;;;
+
+;;; Performance tweaks
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024))
+
+(use-package lsp-mode
+  :ensure t
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'"))
+
+(use-package lsp-ui
+  :ensure t)
+
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
+
 ;;;;;;;;;;;;;;;;;;;;
 ;; Other packages ;;
 ;;;;;;;;;;;;;;;;;;;;
@@ -426,14 +451,6 @@ are parameters of 'kill-ring-save'."
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
   (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
-
-(use-package anaconda-mode
-  :ensure t
-  :init
-  (setq python-shell-interpreter "python3")
-  :config
-  (add-hook 'python-mode-hook 'anaconda-mode)
-  (add-hook 'python-mode-hook 'anaconda-eldoc-mode))
 
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
@@ -518,9 +535,6 @@ are parameters of 'kill-ring-save'."
 (use-package company-irony
   :ensure t)
 
-(use-package company-anaconda
-  :ensure t)
-
 (use-package company
   :ensure t
   :init
@@ -530,7 +544,6 @@ are parameters of 'kill-ring-save'."
 
 (add-to-list 'company-backends 'company-irony)
 (add-to-list 'company-backends 'company-c-headers)
-(add-to-list 'company-backends 'company-anaconda)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -549,6 +562,12 @@ are parameters of 'kill-ring-save'."
   (setq projectile-mode-line-function
         '(lambda () (format " Proj[%s]" (projectile-project-name))))
   (projectile-mode +1))
+
+(use-package ag
+  :ensure t)
+
+(use-package helm-ag
+  :ensure t)
 
 (use-package helm-projectile
   :ensure t
