@@ -162,7 +162,8 @@ are parameters of 'kill-ring-save'."
                              ;; Python interpreter window. Open by Elpy
                              ("\\*Python\\*" display-buffer-in-side-window)
                              ("\\*grep.*\\*" display-buffer-same-window)
-                             ("\\*ag search.*\\*" display-buffer-same-window)))
+                             ("\\*ag search.*\\*" display-buffer-same-window)
+                             ("\\*ein:.*\\*" display-buffer-same-window)))
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
