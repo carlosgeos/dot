@@ -304,9 +304,6 @@ are parameters of 'kill-ring-save'."
   :config
   (require 'flycheck-clj-kondo))
 
-(use-package groovy-mode
-  :ensure t)
-
 (use-package web-mode
   :ensure t
   :init
@@ -317,6 +314,9 @@ are parameters of 'kill-ring-save'."
   "\\.phtml\\'"
   "\\.json\\'"
   "\\.vue\\'"
+  "\\.tsx\\'"
+  "\\.js\\'"
+  "\\.jsx\\'"
   "\\.html\\'"
   "\\.tpl\\.php\\'"
   "\\.[agj]sp\\'"
@@ -335,21 +335,7 @@ are parameters of 'kill-ring-save'."
                              (setq web-mode-code-indent-offset 2)
                              (setq web-mode-css-indent-offset 2))))
 
-(use-package js2-mode
-  :ensure t
-  :mode "\\.js\\'"
-  :config
-  (setq js2-basic-offset 2))
-
-(use-package rjsx-mode
-  :ensure t)
-
 (use-package typescript-mode
-  :ensure t
-  :init
-  (add-hook 'typescript-mode-hook (lambda () (tide-setup) (tide-hl-identifier-mode +1))))
-
-(use-package tide
   :ensure t)
 
 (use-package dockerfile-mode
@@ -381,20 +367,11 @@ are parameters of 'kill-ring-save'."
 (use-package handlebars-mode
   :ensure t)
 
-(use-package coffee-mode
+(use-package sass-mode
   :ensure t)
 
-(use-package sass-mode
-  :ensure t
-  :config
-  (add-hook 'sass-mode-hook (lambda ()
-                              (yas-activate-extra-mode 'css-mode))))
-
 (use-package scss-mode
-  :ensure t
-  :config
-  (add-hook 'scss-mode-hook (lambda ()
-                              (yas-activate-extra-mode 'css-mode))))
+  :ensure t)
 
 (use-package yaml-mode
   :ensure t)
@@ -418,9 +395,18 @@ are parameters of 'kill-ring-save'."
 
 (use-package lsp-mode
   :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'"))
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+  :bind ("C-c l f" . lsp-find-references)
+  :hook
+  (typescript-mode . lsp)
+  (web-mode . lsp)
+  (yaml-mode . lsp)
+  (scss-mode . lsp)
+  (sass-mode . lsp))
 
 (use-package lsp-ui
   :ensure t)
@@ -460,10 +446,6 @@ are parameters of 'kill-ring-save'."
   :init (require 'ess-site)
   :hook (inferior-ess-mode . (lambda ()
                                (setq scroll-down-aggressively 1.0))))
-
-(use-package indium
-  :ensure t
-  :hook (js2-mode . indium-interaction-mode))
 
 (use-package multiple-cursors
   ;; M-x calls to mc do not work well, keybindings are necessary
@@ -513,6 +495,12 @@ are parameters of 'kill-ring-save'."
   (customize-set-variable 'helm-mode-fuzzy-match t)
   ;; Show full name in helm-mini
   (customize-set-variable 'helm-buffer-max-length nil))
+
+(use-package which-key
+  :ensure t
+  :config
+  (setq which-key-idle-delay 0.1)
+  (which-key-mode))
 
 (use-package yasnippet
   :ensure t
@@ -606,8 +594,6 @@ are parameters of 'kill-ring-save'."
   :ensure t
   :config
   ;; Chain checkers together
-  ;; TS
-  (flycheck-add-next-checker 'typescript-tide 'typescript-tslint t)
   ;; C/C++
   (flycheck-add-next-checker 'irony 'c/c++-cppcheck t)
 
@@ -615,10 +601,6 @@ are parameters of 'kill-ring-save'."
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
   (setq flycheck-python-pylint-executable "python3")
-
-  ;; PyCheckers
-  ;; (eval-after-load 'flycheck
-  ;;   '(add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
   ;; Activate flycheck in prog mode
   (add-hook 'prog-mode-hook #'flycheck-mode))
@@ -639,11 +621,6 @@ are parameters of 'kill-ring-save'."
   (setq imaxima-scale-factor 1.3))
 
 ;;; Misc
-
-(use-package restclient
-  :ensure t
-  :mode
-  "\\.http$")
 
 (use-package deft
   :ensure t
