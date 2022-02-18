@@ -409,7 +409,9 @@ are parameters of 'kill-ring-save'."
   (sass-mode . lsp))
 
 (use-package lsp-ui
-  :ensure t)
+  :ensure t
+  :config
+  (setq lsp-ui-doc-enable nil))
 
 (use-package lsp-pyright
   :ensure t
