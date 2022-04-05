@@ -165,6 +165,10 @@ are parameters of 'kill-ring-save'."
                              ("\\*ag search.*\\*" display-buffer-same-window)
                              ("\\*ein:.*\\*" display-buffer-same-window)))
 
+;; Set minimum warning level to prevent native-comp popping up a
+;; buffer with a ton of warnings
+(setq warning-minimum-level :error)
+
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
