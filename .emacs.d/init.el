@@ -394,8 +394,8 @@ are parameters of 'kill-ring-save'."
 ;;;;;;;;;;;;;;
 
 ;;; Performance tweaks
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024))
+(setq gc-cons-threshold 500000000)
+(setq read-process-output-max (* 1024 1024 2))
 
 (use-package lsp-mode
   :ensure t
