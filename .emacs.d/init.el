@@ -127,6 +127,9 @@ are parameters of 'kill-ring-save'."
 ;; no scroll bar
 (scroll-bar-mode -1)
 
+;; line number mode
+(global-display-line-numbers-mode)
+
 ;; Quick keybindings to resize windows
 (global-set-key (kbd "S-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-<right>") 'enlarge-window-horizontally)
