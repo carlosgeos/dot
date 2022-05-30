@@ -213,6 +213,9 @@ are parameters of 'kill-ring-save'."
 ;; different indentation for c code
 (setq-default c-default-style "stroustrup")
 
+;; different paragraph fill for docstrings
+(setq python-fill-docstring-style 'django)
+
 ;; move one paragraph forwards/backwards
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
