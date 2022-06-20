@@ -308,6 +308,15 @@ are parameters of 'kill-ring-save'."
 
 ;; Programming
 
+(use-package tree-sitter
+  :ensure t
+  :config
+  (global-tree-sitter-mode)
+  :hook (python-mode . tree-sitter-hl-mode))
+
+(use-package tree-sitter-langs
+  :ensure t)
+
 (use-package clojure-mode
   :ensure t
   :hook (clojure-mode . subword-mode)
