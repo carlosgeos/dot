@@ -136,6 +136,14 @@ are parameters of 'kill-ring-save'."
 (global-set-key (kbd "S-<down>") 'shrink-window)
 (global-set-key (kbd "S-<up>") 'enlarge-window)
 
+
+(defun switch-to-buffer-list (buffer alist)
+  "Use some window and select it.
+
+BUFFER and ALIST are passed from 'display-buffer-alist'"
+  (select-window (display-buffer-in-side-window buffer alist)))
+
+
 ;; always open these buffers in said buffer. Buffer strings should
 ;; be regexes
 (setq display-buffer-alist '(("\\*YASnippet Tables\\*" display-buffer-same-window)
@@ -156,6 +164,7 @@ are parameters of 'kill-ring-save'."
                              ;; so, open in side-window (which is a
                              ;; bit better
                              ("\\*cider-error\\*" display-buffer-in-side-window)
+                             ("\\*cider-result\\*" (switch-to-buffer-list))
                              ("\\*cider-doc\\*" display-buffer-in-side-window)
                              ;; Open ESS help in same window
                              ("\\*help.*\\*" display-buffer-same-window)
@@ -175,7 +184,7 @@ are parameters of 'kill-ring-save'."
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 
-;; Highline cursorline mode
+;; Highlight cursorline mode
 (global-hl-line-mode)
 
 ;; Move files to trash when deleting
