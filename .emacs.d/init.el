@@ -340,7 +340,6 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
 
   :mode
   "\\.phtml\\'"
-  "\\.json\\'"
   "\\.vue\\'"
   "\\.tsx\\'"
   "\\.js\\'"
