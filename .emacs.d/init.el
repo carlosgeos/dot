@@ -417,18 +417,21 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
 ;;;;;;;;;;;;;;
 
 ;;; Performance tweaks
-(setq gc-cons-threshold 500000000)
+(setq gc-cons-threshold 1000000000)
 (setq read-process-output-max (* 1024 1024 2))
+(setq max-lisp-eval-depth 3200)
 
 (use-package lsp-mode
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-enable-indentation nil)
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
   :bind ("C-c l f" . lsp-find-references)
   :hook
+  (clojure-mode . lsp)
   (typescript-mode . lsp)
   (web-mode . lsp)
   (yaml-mode . lsp)
