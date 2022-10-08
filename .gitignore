@@ -9,12 +9,6 @@
 .emacs.d/*
 !.emacs.d/init.el
 
-# --- ssh config
-
-!.ssh
-.ssh/*
-!.ssh/config
-
 # --- gnupg config
 
 !.gnupg
