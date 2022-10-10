@@ -426,6 +426,7 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-enable-indentation nil)
+  (setq lsp-lens-enable nil)
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
