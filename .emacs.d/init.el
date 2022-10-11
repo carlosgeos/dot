@@ -417,7 +417,7 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
 ;;;;;;;;;;;;;;
 
 ;;; Performance tweaks
-(setq gc-cons-threshold 1000000000)
+(setq gc-cons-threshold 3000000)
 (setq read-process-output-max (* 1024 1024 2))
 (setq max-lisp-eval-depth 3200)
 
