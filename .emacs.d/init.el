@@ -529,12 +529,6 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
   ;; Show full name in helm-mini
   (customize-set-variable 'helm-buffer-max-length nil))
 
-(use-package which-key
-  :ensure t
-  :config
-  (setq which-key-idle-delay 0.1)
-  (which-key-mode))
-
 (use-package yasnippet
   :ensure t
   :init
