@@ -136,6 +136,12 @@ are parameters of 'kill-ring-save'."
 (global-set-key (kbd "S-<down>") 'shrink-window)
 (global-set-key (kbd "S-<up>") 'enlarge-window)
 
+;; User function keybindings
+(global-set-key [f5] 'query-replace)
+(global-set-key [f6] 'version)          ;TBD
+(global-set-key [f7] 'version)          ;TBD
+(global-set-key [f8] 'cider-eval-buffer)
+
 
 (defun switch-to-buffer-list (buffer alist)
   "Use some window and select it.
@@ -648,14 +654,6 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
   (setq imaxima-scale-factor 1.3))
 
 ;;; Misc
-
-(use-package deft
-  :ensure t
-  :bind ("<f8>" . deft)
-  :init
-  (setq deft-extensions '("org" "txt"))
-  (setq deft-directory "~/Nextcloud/deft")
-  (setq deft-auto-save-interval 0))
 
 (use-package pdf-tools
   :ensure t
