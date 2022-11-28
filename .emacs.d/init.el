@@ -171,6 +171,8 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
                              ;; so, open in side-window (which is a
                              ;; bit better
                              ("\\*cider-error\\*" display-buffer-in-side-window)
+                             ("\\*cider-test-report\\*" display-buffer-use-some-window
+                              display-buffer-pop-up-window (inhibit-same-window . t))
                              ("\\*cider-result\\*" (switch-to-buffer-list))
                              ("\\*cider-doc\\*" display-buffer-in-side-window)
                              ;; Open ESS help in same window
