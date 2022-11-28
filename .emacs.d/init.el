@@ -160,6 +160,7 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
                              ("\\*xref\\*" display-buffer-same-window)
                              ("\\magit-diff\\:" display-buffer-use-some-window
                               display-buffer-pop-up-window (inhibit-same-window . t))
+                             ("\\magit-stash\\:" display-buffer-same-window)
                              ("\\magit-revision\\:" display-buffer-same-window)
                              ;; The following is generated with the rx macro
                              ("magit:[[:space:]]\\(?:.\\|\\)*" display-buffer-same-window)
