@@ -88,11 +88,11 @@
 (add-hook 'before-save-hook 'untabify-except-makefiles)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(defun slick-copy (beg end)
-  "Advice for 'kill-ring-save'.
+(defun slick-copy (_beg _end)
+  "Advice for `kill-ring-save`.
 
 It copies the current line if no region is selected.  BEG and END
-are parameters of 'kill-ring-save'."
+are parameters of `kill-ring-save`."
   (interactive
    (if mark-active
        (list (region-beginning) (region-end))
@@ -107,7 +107,6 @@ are parameters of 'kill-ring-save'."
   (save-excursion
     (delete-trailing-whitespace)
     (indent-region (point-min) (point-max) nil)))
-
 
 (global-set-key (kbd "C-x \\") 'indent-buffer)
 
@@ -146,7 +145,7 @@ are parameters of 'kill-ring-save'."
 (defun switch-to-buffer-list (buffer alist)
   "Use some window and select it.
 
-BUFFER and ALIST are passed from 'display-buffer-alist'"
+BUFFER and ALIST are passed from `display-buffer-alist`"
   (select-window (display-buffer-in-side-window buffer alist)))
 
 
@@ -428,7 +427,13 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
 ;;;;;;;;;;;;;;
 
 ;;; Performance tweaks
-(setq gc-cons-threshold 3000000)
+
+;; Around 2MB is the sweetspot.
+;; This is also an option: http://bling.github.io/blog/2016/01/18/why-are-you-changing-gc-cons-threshold/
+;; Setting it to a big number like 10MB or 100MB is not a good
+;; idea. When it does actually garbage collect, Emacs will freeze
+;; during a second or two
+(setq gc-cons-threshold 2000000)        ;around 2MB
 (setq read-process-output-max (* 1024 1024 2))
 (setq max-lisp-eval-depth 3200)
 
@@ -678,9 +683,6 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
-(use-package undo-tree
-  :ensure t)
-
 (use-package aggressive-indent
   :ensure t
   :init
@@ -688,30 +690,6 @@ BUFFER and ALIST are passed from 'display-buffer-alist'"
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
-
-(use-package ligature
-  :load-path "~/.emacs.d/ligature"
-  :config
-  ;; Enable the "www" ligature in every possible major mode
-  (ligature-set-ligatures 't '("www"))
-  ;; Enable all Cascadia Code ligatures in programming modes
-  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                                       "\\\\" "://"))
-  ;; Enables ligature checks globally in all buffers. You can also do it
-  ;; per mode with `ligature-mode'.
-  (global-ligature-mode t))
-
 
 (provide 'init)
 
