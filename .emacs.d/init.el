@@ -340,6 +340,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :ensure t
   :hook (clojure-mode . subword-mode)
   :config
+  (put-clojure-indent 'forcat 1)
   (require 'flycheck-clj-kondo))
 
 (use-package web-mode
