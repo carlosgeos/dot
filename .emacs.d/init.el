@@ -282,7 +282,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (require 'ob-clojure)
 (setq org-babel-clojure-backend 'cider)
 
-(setq org-agenda-files '("~/Nextcloud/agenda.org"))
 (setq org-agenda-start-on-weekday 1)
 (setq calendar-week-start-day 1)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -614,6 +613,10 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq transient-default-level 5))
 
 (defun ediff-copy-both-to-C ()
+  "Select both options in a Magit ediff conflict.
+
+In a Magit ediff screen, during a conflict, this fn copies option
+A and then B."
   (interactive)
   (ediff-copy-diff ediff-current-difference nil 'C nil
                    (concat
@@ -684,13 +687,13 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
-(use-package aggressive-indent
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-  (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
-  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
+;; (use-package aggressive-indent
+;;   :ensure t
+;;   :init
+;;   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
 (provide 'init)
 
