@@ -339,7 +339,9 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :ensure t
   :hook (clojure-mode . subword-mode)
   :config
-  (put-clojure-indent 'forcat 1)
+  (define-clojure-indent
+   (forcat 1)
+   (defsc :defn))
   (require 'flycheck-clj-kondo))
 
 (use-package web-mode
@@ -486,7 +488,8 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :init
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
-  (setq cider-repl-history-file "~/.emacs.d/nrepl-history"))
+  (setq cider-repl-history-file "~/.emacs.d/nrepl-history")
+  :bind ("C-c <tab>" . cider-format-defun))
 
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
