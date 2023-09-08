@@ -36,3 +36,9 @@
 
 !.toprc
 !.rtorrent.rc
+
+# --- Lein config
+
+!.lein
+.lein/*
+!.lein/profiles.clj
