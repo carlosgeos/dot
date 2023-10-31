@@ -299,6 +299,8 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
  'org-babel-load-languages
  '((python . t)))
 
+(setq org-babel-python-command "python3")
+
 (use-package org-noter
   :ensure t
   :config
@@ -690,13 +692,13 @@ A and then B."
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
-;; (use-package aggressive-indent
-;;   :ensure t
-;;   :init
-;;   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-;;   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-;;   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
-;;   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
+(use-package aggressive-indent
+  :ensure t
+  :init
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
 (provide 'init)
 
