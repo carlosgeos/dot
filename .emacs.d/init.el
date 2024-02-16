@@ -450,6 +450,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]resources\\'")
   :bind ("C-c l f" . lsp-find-references)
   :hook
   (clojure-mode . lsp)
@@ -514,15 +515,8 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (use-package avy
   :ensure t
-  :bind (("C-;" . avy-goto-word-1)
-         ("C-c SPC" . avy-goto-char)))   ;FIXME: this is also clojure-align...
-;; There are a lot more binds to set for avy!
+  :bind (("C-;" . avy-goto-word-1)))
 
-(use-package ace-window
-  :ensure t
-  :init
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind ("M-o" . ace-window))
 
 (use-package expand-region
   :ensure t
@@ -566,21 +560,15 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   ;; necessary
   :ensure t)
 
-(use-package company-c-headers
-  :ensure t)
+;; (use-package company
+;;   :ensure t
+;;   :init
+;;   (global-company-mode)
+;;   :config
+;;   (setq company-idle-delay 0.1))
 
-(use-package company-irony
-  :ensure t)
-
-(use-package company
-  :ensure t
-  :init
-  (global-company-mode)
-  :config
-  (setq company-idle-delay 0.1))
-
-(add-to-list 'company-backends 'company-irony)
-(add-to-list 'company-backends 'company-c-headers)
+;; (add-to-list 'company-backends 'company-irony)
+;; (add-to-list 'company-backends 'company-c-headers)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -692,13 +680,13 @@ A and then B."
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
-(use-package aggressive-indent
-  :ensure t
-  :init
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-  (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
-  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
+;; (use-package aggressive-indent
+;;   :ensure t
+;;   :init
+;;   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
+;;   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
 (provide 'init)
 
