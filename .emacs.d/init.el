@@ -31,35 +31,33 @@
 ;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Start package.el (basic) and install use-package ;;
+;; Bootstrap straight.el                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'package)
-(defvar package-list)
-(setq package-list '(use-package))
-(setq load-prefer-newer t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-;; The good repo
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+;; Install use-package
+(straight-use-package 'use-package)
 
-(package-initialize)
-
-;; Only refresh package list if package is not present.
-;; Saves time if machine is configured correctly
-(or (file-exists-p package-user-dir)
-    (package-refresh-contents))
-
-;; Install the initial package-list before anything else (contains
-;; use-package)
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-refresh-contents)
-    (package-install package)))
-
-(require 'use-package)
+;; Configure use-package to use straight.el by default
+(use-package straight
+  :custom
+  (straight-use-package-by-default t))
 
 (use-package exec-path-from-shell
-  :ensure t
   :init
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize)))
@@ -87,19 +85,6 @@
 
 (add-hook 'before-save-hook 'untabify-except-makefiles)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(defun slick-copy (_beg _end)
-  "Advice for `kill-ring-save`.
-
-It copies the current line if no region is selected.  BEG and END
-are parameters of `kill-ring-save`."
-  (interactive
-   (if mark-active
-       (list (region-beginning) (region-end))
-     (message "Copied line")
-     (list (line-beginning-position) (line-beginning-position 2)))))
-
-(advice-add 'kill-ring-save :before #'slick-copy)
 
 (defun indent-buffer ()
   "Indent an entire buffer using the default intenting scheme."
@@ -189,7 +174,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 ;; Set minimum warning level to prevent native-comp popping up a
 ;; buffer with a ton of warnings
-(setq warning-minimum-level :error)
+;; (setq warning-minimum-level :error)
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -279,48 +264,45 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; Org settings ;;
 ;;;;;;;;;;;;;;;;;;
 
-(require 'ob-clojure)
-(setq org-babel-clojure-backend 'cider)
+;; (require 'ob-clojure)
+;; (setq org-babel-clojure-backend 'cider)
 
-(setq org-agenda-start-on-weekday 1)
-(setq calendar-week-start-day 1)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
-(setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
-                           (?B . (:foreground "cyan"))
-                           (?C . (:foreground "green"))))
-(setq org-todo-keyword-faces
-      '(("REVIEW" . "#A875FF")
-        ("ON_HOLD" . "#F81C07")))
+;; (setq org-agenda-start-on-weekday 1)
+;; (setq calendar-week-start-day 1)
+;; (define-key global-map "\C-ca" 'org-agenda)
+;; (setq org-log-done t)
+;; (setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+;;                            (?B . (:foreground "cyan"))
+;;                            (?C . (:foreground "green"))))
+;; (setq org-todo-keyword-faces
+;;       '(("REVIEW" . "#A875FF")
+;;         ("ON_HOLD" . "#F81C07")))
 
-(setq org-agenda-skip-deadline-prewarning-if-scheduled t)
+;; (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((python . t)))
 
-(setq org-babel-python-command "python3")
+;; (setq org-babel-python-command "python3")
 
-(use-package org-noter
-  :ensure t
-  :config
-  ;; sizing adjustments depending on the screen used
-  (when (system-is-linux)
-    (setq org-noter-doc-split-fraction '(0.7 . 0.5))
-    (plist-put org-format-latex-options :scale 2.0))
-  (when (system-is-mac)
-    (setq org-noter-doc-split-fraction '(0.55 . 0.5))
-    (plist-put org-format-latex-options :scale 1.3))
-  (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill)
-  (setq org-preview-latex-image-directory "~/.lxtimg/"))
+;; (use-package org-noter
+;;   :config
+;;   ;; sizing adjustments depending on the screen used
+;;   (when (system-is-linux)
+;;     (setq org-noter-doc-split-fraction '(0.7 . 0.5))
+;;     (plist-put org-format-latex-options :scale 2.0))
+;;   (when (system-is-mac)
+;;     (setq org-noter-doc-split-fraction '(0.55 . 0.5))
+;;     (plist-put org-format-latex-options :scale 1.3))
+;;   (add-hook 'org-noter-notes-mode-hook 'turn-on-auto-fill)
+;;   (setq org-preview-latex-image-directory "~/.lxtimg/"))
 
-(use-package org-tree-slide
-  :ensure t
-  :custom
-  (org-image-actual-width nil))
+;; (use-package org-tree-slide
+;;   :custom
+;;   (org-image-actual-width nil))
 
-;; (use-package edit-indirect
-;;   :ensure t)
+;; (use-package edit-indirect)
 
 ;;;;;;;;;;;;;;;;;;;
 ;; Editing modes ;;
@@ -328,17 +310,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 ;; Programming
 
-(use-package tree-sitter
-  :ensure t
-  :config
-  (global-tree-sitter-mode)
-  :hook (python-mode . tree-sitter-hl-mode))
-
-(use-package tree-sitter-langs
-  :ensure t)
-
 (use-package clojure-mode
-  :ensure t
   :hook (clojure-mode . subword-mode)
   :config
   (define-clojure-indent
@@ -347,7 +319,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (require 'flycheck-clj-kondo))
 
 (use-package web-mode
-  :ensure t
   :init
   (setq web-mode-enable-css-colorization t)
   (setq web-mode-enable-auto-pairing t)
@@ -376,22 +347,19 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
                              (setq web-mode-code-indent-offset 2)
                              (setq web-mode-css-indent-offset 2))))
 
-(use-package typescript-mode
-  :ensure t)
+(use-package typescript-mode)
 
-(use-package dockerfile-mode
-  :ensure t)
+(use-package dockerfile-mode)
 
 ;; Markup, style, data and build tools
 
-(use-package tex-site
-  :ensure auctex
+(use-package tex
+  :straight auctex
   :init
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
   (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode +1))))
 
 (use-package markdown-mode
-  :ensure t
   :mode
   "\\.markdown\\'"
   "\\.md\\'"
@@ -399,32 +367,19 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq markdown-command "pandoc"))
 
 (use-package sphinx-doc
-  :ensure t
   :hook (python-mode . sphinx-doc-mode))
 
-(use-package slim-mode
-  :ensure t)
+(use-package sass-mode)
 
-(use-package handlebars-mode
-  :ensure t)
+(use-package scss-mode)
 
-(use-package sass-mode
-  :ensure t)
+(use-package yaml-mode)
 
-(use-package scss-mode
-  :ensure t)
+(use-package cmake-mode)
 
-(use-package yaml-mode
-  :ensure t)
+(use-package gmpl-mode)
 
-(use-package cmake-mode
-  :ensure t)
-
-(use-package gmpl-mode
-  :ensure t)
-
-(use-package terraform-mode
-  :ensure t)
+(use-package terraform-mode)
 
 ;;;;;;;;;;;;;;
 ;; LSP mode ;;
@@ -442,7 +397,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (setq max-lisp-eval-depth 3200)
 
 (use-package lsp-mode
-  :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-enable-indentation nil)
@@ -461,12 +415,10 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (sass-mode . lsp))
 
 (use-package lsp-ui
-  :ensure t
   :config
   (setq lsp-ui-doc-enable nil))
 
 (use-package lsp-pyright
-  :ensure t
   :hook (python-mode . (lambda ()
                          (require 'lsp-pyright)
                          (lsp))))  ; or lsp-deferred
@@ -475,11 +427,9 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; Other packages ;;
 ;;;;;;;;;;;;;;;;;;;;
 
-(use-package irony-eldoc
-  :ensure t)
+(use-package irony-eldoc)
 
 (use-package irony
-  :ensure t
   :config
   (add-hook 'c++-mode-hook 'irony-mode)
   (add-hook 'c-mode-hook 'irony-mode)
@@ -487,7 +437,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 (use-package cider
-  :ensure t
   :init
   (setq cider-repl-pop-to-buffer-on-connect nil)
   (setq cider-repl-use-pretty-printing t)
@@ -497,7 +446,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
   ;; REPL. It's set as a buffer-local variable
-  :ensure t
   :init (require 'ess-site)
   :hook (inferior-ess-mode . (lambda ()
                                (setq scroll-down-aggressively 1.0))))
@@ -508,26 +456,21 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   ;;
   ;; mc is always asking if a certain M-x action is to be done for all
   ;; cursors, annoying.
-  :ensure t
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-a" . mc/mark-all-like-this)))
 
 (use-package avy
-  :ensure t
   :bind (("C-;" . avy-goto-word-1)))
 
 
 (use-package expand-region
-  :ensure t
   :bind ("C-<return>" . er/expand-region))
 
 (use-package paredit
-  :ensure t
   :hook ((emacs-lisp-mode clojure-mode) . paredit-mode))
 
 (use-package helm
-  :ensure t
   :init
   (helm-mode t)
   :bind (("M-x" . helm-M-x)
@@ -545,7 +488,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (customize-set-variable 'helm-buffer-max-length nil))
 
 (use-package yasnippet
-  :ensure t
   :init
   (yas-global-mode 1)
   ;; Remove Yasnippet's default tab key binding. Does not work well
@@ -555,13 +497,11 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
               ("<tab>" . nil)
               ("C-c ;" . yas-expand)))
 
-(use-package yasnippet-snippets
-  ;; yasnippet no longer ships with the snippets, hence this is also
-  ;; necessary
-  :ensure t)
+;; yasnippet no longer ships with the snippets, hence this is also
+;; necessary
+(use-package yasnippet-snippets)
 
 ;; (use-package company
-;;   :ensure t
 ;;   :init
 ;;   (global-company-mode)
 ;;   :config
@@ -572,7 +512,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
-  :ensure t
   :config
   (cljr-add-keybindings-with-prefix "C-c j")
   :hook (clojure-mode . clj-refactor-mode))
@@ -580,7 +519,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;;; Project management stuff
 
 (use-package projectile
-  :ensure t
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (setq projectile-completion-system 'helm)
@@ -588,19 +526,13 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
         '(lambda () (format " Proj[%s]" (projectile-project-name))))
   (projectile-mode +1))
 
-(use-package ag
-  :ensure t)
-
-(use-package helm-ag
-  :ensure t)
+(use-package helm-ag)
 
 (use-package helm-projectile
-  :ensure t
   :config
   (helm-projectile-on))
 
 (use-package magit
-  :ensure t
   :bind ("C-x g" . magit-status)
   :config
   (setq transient-default-level 5))
@@ -621,17 +553,13 @@ A and then B."
 (add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
 
 (use-package kubernetes
-  :ensure t
   :bind ("C-x t" . kubernetes-overview))
 
-(use-package flycheck-irony
-  :ensure t)
+(use-package flycheck-irony)
 
-(use-package flycheck-clj-kondo
-  :ensure t)
+(use-package flycheck-clj-kondo)
 
 (use-package flycheck
-  :ensure t
   :config
   ;; Chain checkers together
   ;; C/C++
@@ -663,7 +591,6 @@ A and then B."
 ;;; Misc
 
 (use-package pdf-tools
-  :ensure t
   :config
   (pdf-tools-install)
   (setq pdf-view-use-scaling t))
@@ -671,17 +598,14 @@ A and then B."
 ;;; Appearance
 
 (use-package doom-themes
-  :ensure t
   :config
   (load-theme 'doom-molokai t))
 
 (use-package smart-mode-line
-  :ensure t
   :config
   (add-hook 'after-init-hook 'sml/setup t))
 
 ;; (use-package aggressive-indent
-;;   :ensure t
 ;;   :init
 ;;   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
 ;;   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
