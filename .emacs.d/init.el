@@ -121,7 +121,7 @@
 (global-set-key (kbd "S-<up>") 'enlarge-window)
 
 ;; User function keybindings
-(global-set-key [f5] 'query-replace)
+(global-set-key [f5] 'anzu-query-replace)
 (global-set-key [f6] 'version)          ;TBD
 (global-set-key [f7] 'version)          ;TBD
 (global-set-key [f8] 'cider-eval-buffer)
@@ -174,7 +174,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 ;; Set minimum warning level to prevent native-comp popping up a
 ;; buffer with a ton of warnings
-;; (setq warning-minimum-level :error)
+(setq warning-minimum-level :error)
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -483,9 +483,16 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
          ;; binding
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
+  (setq completions-detailed t)
   (customize-set-variable 'helm-mode-fuzzy-match t)
   ;; Show full name in helm-mini
   (customize-set-variable 'helm-buffer-max-length nil))
+
+(use-package helm-ag
+  :bind
+  (("M-g a" . helm-do-grep-ag)))
+
+(use-package anzu)
 
 (use-package yasnippet
   :init
@@ -525,8 +532,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq projectile-mode-line-function
         '(lambda () (format " Proj[%s]" (projectile-project-name))))
   (projectile-mode +1))
-
-(use-package helm-ag)
 
 (use-package helm-projectile
   :config
