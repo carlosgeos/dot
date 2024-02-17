@@ -597,6 +597,8 @@ A and then B."
   (pdf-tools-install)
   (setq pdf-view-use-scaling t))
 
+(use-package hackernews)
+
 ;;; Appearance
 
 (use-package doom-themes
