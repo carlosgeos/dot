@@ -477,9 +477,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
   (setq completions-detailed t)
-  (customize-set-variable 'helm-mode-fuzzy-match t)
-  ;; Show full name in helm-mini
-  (customize-set-variable 'helm-buffer-max-length nil))
+  (customize-set-variable 'helm-mode-fuzzy-match t))
 
 (use-package helm-ag
   :bind
