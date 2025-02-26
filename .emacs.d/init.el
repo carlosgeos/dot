@@ -373,8 +373,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (use-package sass-mode)
 
-(use-package scss-mode)
-
 (use-package yaml-mode)
 
 (use-package cmake-mode)
