@@ -31,7 +31,8 @@
 ;;; Code:
 
 ;; Increase startup gc-threshold
-(setq gc-cons-threshold 100000000)      ;100MB
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 0.6)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bootstrap straight.el                            ;;
@@ -109,7 +110,7 @@
 (setq inhibit-startup-message t)
 
 ;; y/n instead of yes/no
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 ;; no scroll bar
 (scroll-bar-mode -1)
@@ -311,8 +312,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; Editing modes ;;
 ;;;;;;;;;;;;;;;;;;;
 
-;; Programming
-
 (use-package clojure-mode
   :hook (clojure-mode . subword-mode)
   :config
@@ -351,7 +350,8 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (use-package typescript-mode)
 
-(use-package dockerfile-mode)
+(use-package dockerfile-mode
+  :mode "\\Dockerfile\\'")
 
 ;; Markup, style, data and build tools
 
@@ -437,6 +437,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (use-package ess
   ;; ESS needs aggressive scroll on the inferior interactive
   ;; REPL. It's set as a buffer-local variable
+  :defer t
   :init (require 'ess-site)
   :hook (inferior-ess-mode . (lambda ()
                                (setq scroll-down-aggressively 1.0))))
@@ -461,6 +462,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :hook ((emacs-lisp-mode clojure-mode) . paredit-mode))
 
 (use-package helm
+  :defer t
   :init
   (helm-mode t)
   :bind (("M-x" . helm-M-x)
@@ -569,6 +571,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (helm-projectile-on))
 
 (use-package magit
+  :defer t
   :bind ("C-x g" . magit-status)
   :config
   (setq transient-default-level 5))
@@ -655,9 +658,13 @@ A and then B."
 ;; Setting it to a big number like 10MB or 100MB is not a good
 ;; idea. When it does actually garbage collect, Emacs will freeze
 ;; during a second or two
-(setq gc-cons-threshold 3000000)        ;around 3MB
-(setq read-process-output-max (* 1024 1024 2))
-(setq max-lisp-eval-depth 3200)
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold 3000000
+                  gc-cons-percentage 0.1
+                  read-process-output-max (* 1024 1024 2)
+                  max-lisp-eval-depth 3200)))
+
 
 (provide 'init)
 
