@@ -521,13 +521,18 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :config
   ;; Anthropic's max-tokens setting is 1024, so we need to raise it
   ;; gptel issue #683
-  (setq gptel-max-tokens 2048)
+  (setq gptel-max-tokens 4096)
   (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
 
 (gptel-make-ollama "Ollama"
   :host "localhost:11434"
   :stream t
-  :models '(deepseek-coder-v2:16b))
+  :models '(deepseek-coder-v2:16b
+            qwen2.5-coder:14b
+            phi4:latest
+            codellama:13b
+            starcoder:15b
+            gemma3:12b))
 
 (gptel-make-anthropic "Claude"
   :stream t
@@ -536,6 +541,13 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-gemini "Gemini"
   :stream t
   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
+
+(gptel-make-openai "GitHub Models"
+  :host "models.inference.ai.azure.com"
+  :endpoint "/chat/completions?api-version=2024-05-01-preview"
+  :stream t
+  :key (gptel-api-key-from-auth-source "models.inference.ai.azure.com" "apikey")
+  :models '(gpt-4o))
 
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
