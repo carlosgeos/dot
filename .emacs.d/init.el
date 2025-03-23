@@ -454,7 +454,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (use-package avy
   :bind (("C-;" . avy-goto-word-1)))
 
-
 (use-package expand-region
   :bind ("C-<return>" . er/expand-region))
 
@@ -517,6 +516,31 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :config
   (cljr-add-keybindings-with-prefix "C-c j")
   :hook (clojure-mode . clj-refactor-mode))
+
+(use-package gptel
+  :config
+  ;; Anthropic's max-tokens setting is 1024, so we need to raise it
+  ;; gptel issue #683
+  (setq gptel-max-tokens 2048)
+  (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
+
+(gptel-make-ollama "Ollama"
+  :host "localhost:11434"
+  :stream t
+  :models '(deepseek-coder-v2:16b))
+
+(gptel-make-anthropic "Claude"
+  :stream t
+  :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
+
+(gptel-make-gemini "Gemini"
+  :stream t
+  :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
+
+(use-package copilot
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
+  :ensure t
+  :hook (prog-mode . copilot-mode))
 
 ;;; Project management stuff
 
