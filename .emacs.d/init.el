@@ -34,6 +34,9 @@
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6)
 
+(setq load-prefer-newer t)
+(setq require-final-newline t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Bootstrap straight.el                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -118,6 +121,11 @@
 ;; line number mode
 (global-display-line-numbers-mode)
 
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+
 ;; Quick keybindings to resize windows
 (global-set-key (kbd "S-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-<right>") 'enlarge-window-horizontally)
@@ -127,9 +135,11 @@
 ;; User function keybindings
 (global-set-key [f5] 'anzu-query-replace)
 (global-set-key [f6] 'version)          ;TBD
-(global-set-key [f7] 'version)          ;TBD
+(global-set-key [f7] 'gptel-send)
 (global-set-key [f8] 'cider-eval-buffer)
 
+;; smart tab behavior - indent or complete
+(setq tab-always-indent 'complete)
 
 (defun switch-to-buffer-list (buffer alist)
   "Use some window and select it.
@@ -174,7 +184,13 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
                              ("\\*Python\\*" display-buffer-in-side-window)
                              ("\\*grep.*\\*" display-buffer-same-window)
                              ("\\*ag search.*\\*" display-buffer-same-window)
-                             ("\\*ein:.*\\*" display-buffer-same-window)))
+                             ("\\*ein:.*\\*" display-buffer-same-window)
+                             ("\\*Gemini*\\*" display-buffer-use-some-window)
+                             ("\\*Claude*\\*" display-buffer-use-some-window)
+                             ("\\*ChatGPT*\\*" display-buffer-use-some-window)
+                             ("\\*GitHub Models*\\*" display-buffer-use-some-window)
+                             ("\\*Ollama*\\*" display-buffer-use-some-window)
+                             ("\\*Free keys*\\*" display-buffer-same-window)))
 
 ;; Set minimum warning level to prevent native-comp popping up a
 ;; buffer with a ton of warnings
@@ -382,7 +398,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (use-package terraform-mode)
 
 ;;;;;;;;;;;;;;
-;; LSP mode ;;
+;; LSP      ;;
 ;;;;;;;;;;;;;;
 
 (use-package lsp-mode
@@ -390,22 +406,16 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq lsp-keymap-prefix "C-c l")
   (setq lsp-enable-indentation nil)
   (setq lsp-lens-enable nil)
+  (setq lsp-enable-completion-at-point nil)
   :config
   (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-file-watch-threshold 2500)
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]venv\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]resources\\'")
-  :bind ("C-c l f" . lsp-find-references)
+  :bind
+  ("C-c l f" . lsp-find-references)
   :hook
-  (clojure-mode . lsp)
-  (typescript-mode . lsp)
-  (web-mode . lsp)
-  (yaml-mode . lsp)
-  (scss-mode . lsp)
-  (sass-mode . lsp))
-
-(use-package lsp-ui
-  :config
-  (setq lsp-ui-doc-enable nil))
+  (clojure-mode . lsp))
 
 (use-package lsp-pyright
   :hook (python-mode . (lambda ()
@@ -433,14 +443,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq cider-connection-message-fn nil)
   :config
   (cider-enable-flex-completion))
-
-(use-package ess
-  ;; ESS needs aggressive scroll on the inferior interactive
-  ;; REPL. It's set as a buffer-local variable
-  :defer t
-  :init (require 'ess-site)
-  :hook (inferior-ess-mode . (lambda ()
-                               (setq scroll-down-aggressively 1.0))))
 
 (use-package multiple-cursors
   ;; M-x calls to mc do not work well, keybindings are necessary
@@ -486,20 +488,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :init
   (global-anzu-mode 1))
 
-(use-package yasnippet
-  :init
-  (yas-global-mode 1)
-  ;; Remove Yasnippet's default tab key binding. Does not work well
-  ;; with indenting and company mode.
-  :bind (:map yas-minor-mode-map
-              ("TAB" . nil)
-              ("<tab>" . nil)
-              ("C-c ;" . yas-expand)))
-
-;; yasnippet no longer ships with the snippets, hence this is also
-;; necessary
-(use-package yasnippet-snippets)
-
 (use-package company
   :init
   (global-company-mode)
@@ -512,6 +500,10 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   ;; 'company-dabbrev' (simple completion in buffer) remains fast with
   ;; a 0.15 idle delay
   (setq company-idle-delay 0.15))
+
+(use-package company-box
+  ;; Avoids conflicts between Copilot and company-mode
+  :hook (company-mode . company-box-mode))
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
@@ -538,23 +530,28 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (gptel-make-anthropic "Claude"
   :stream t
-  :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey"))
+  :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
+  :models '(claude-3-7-sonnet-20250219))
 
 (gptel-make-gemini "Gemini"
   :stream t
-  :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey"))
+  :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
+  :models'(gemini-2.0-flash gemini-2.5-pro-exp-03-25))
 
 (gptel-make-openai "GitHub Models"
   :host "models.inference.ai.azure.com"
   :endpoint "/chat/completions?api-version=2024-05-01-preview"
   :stream t
   :key (gptel-api-key-from-auth-source "models.inference.ai.azure.com" "apikey")
-  :models '(gpt-4o))
+  :models '(gpt-4o DeepSeek-R1 DeepSeek-V3 Codestral-2501))
 
 (use-package copilot
   :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-  :ensure t
-  :hook (prog-mode . copilot-mode))
+  :hook (prog-mode . copilot-mode)
+  :config
+  (setq copilot-idle-delay 0.5)
+  :bind (("C-<tab>" . copilot-accept-completion)
+         ("C-M-<tab>" . copilot-accept-completion-by-word)))
 
 ;;; Project management stuff
 
@@ -650,6 +647,8 @@ A and then B."
 ;;   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;;   (add-hook 'common-lisp-mode-hook #'aggressive-indent-mode)
 ;;   (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
+
+(use-package free-keys)
 
 ;;; Performance tweaks
 
