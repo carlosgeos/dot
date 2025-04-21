@@ -488,6 +488,20 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :init
   (global-anzu-mode 1))
 
+(use-package yasnippet
+   :init
+   (yas-global-mode 1)
+   ;; Remove Yasnippet's default tab key binding. Does not work well
+   ;; with indenting and company mode.
+   :bind (:map yas-minor-mode-map
+               ("TAB" . nil)
+               ("<tab>" . nil)
+               ("C-c ;" . yas-expand)))
+
+ ;; yasnippet no longer ships with the snippets, hence this is also
+ ;; necessary
+ (use-package yasnippet-snippets)
+
 (use-package company
   :init
   (global-company-mode)
