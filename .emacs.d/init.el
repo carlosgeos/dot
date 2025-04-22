@@ -516,7 +516,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq company-idle-delay 0.15))
 
 (use-package company-box
-  ;; Avoids conflicts between Copilot and company-mode
+  ;; also avoids potential conflicts between Copilot and company-mode
   :hook (company-mode . company-box-mode))
 
 (use-package clj-refactor
@@ -552,20 +552,10 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
   :models'(gemini-2.0-flash gemini-2.5-pro-exp-03-25))
 
-(gptel-make-openai "GitHub Models"
-  :host "models.inference.ai.azure.com"
-  :endpoint "/chat/completions?api-version=2024-05-01-preview"
+(gptel-make-xai "xAI"
   :stream t
-  :key (gptel-api-key-from-auth-source "models.inference.ai.azure.com" "apikey")
-  :models '(gpt-4o DeepSeek-R1 DeepSeek-V3 Codestral-2501))
-
-(use-package copilot
-  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("*.el"))
-  :hook (prog-mode . copilot-mode)
-  :config
-  (setq copilot-idle-delay 0.5)
-  :bind (("C-<tab>" . copilot-accept-completion)
-         ("C-M-<tab>" . copilot-accept-completion-by-word)))
+  :key (gptel-api-key-from-auth-source "api.x.ai" "apikey")
+  :models '(grok-3-latest))
 
 ;;; Project management stuff
 
