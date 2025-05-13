@@ -550,7 +550,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-gemini "Gemini"
   :stream t
   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-  :models'(gemini-2.0-flash gemini-2.5-pro-exp-03-25))
+  :models'(gemini-2.5-pro-preview-05-06))
 
 (gptel-make-xai "xAI"
   :stream t
