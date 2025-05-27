@@ -545,12 +545,12 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-anthropic "Claude"
   :stream t
   :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
-  :models '(claude-3-7-sonnet-20250219))
+  :models '(claude-sonnet-4-20250514 claude-opus-4-20250514))
 
 (gptel-make-gemini "Gemini"
   :stream t
   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-  :models'(gemini-2.5-pro-preview-05-06))
+  :models'(gemini-2.5-flash))
 
 (gptel-make-xai "xAI"
   :stream t
