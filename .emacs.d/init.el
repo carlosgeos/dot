@@ -34,35 +34,33 @@
 (setq gc-cons-threshold most-positive-fixnum
       gc-cons-percentage 0.6)
 
+;; Configure use-package
+(require 'package)
+(defvar package-list)
+(setq package-list '(use-package))
 (setq load-prefer-newer t)
-(setq require-final-newline t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Bootstrap straight.el                            ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
 
-;; Install use-package
-(straight-use-package 'use-package)
+(package-initialize)
 
-;; Configure use-package to use straight.el by default
-(use-package straight
-  :custom
-  (straight-use-package-by-default t))
+;; Only refresh package list if package is not present.
+;; Saves time if machine is configured correctly
+(or (file-exists-p package-user-dir)
+    (package-refresh-contents))
+
+;; Install the initial package-list before anything else (contains
+;; use-package)
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-refresh-contents)
+    (package-install package)))
+
+(require 'use-package)
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 (use-package exec-path-from-shell
   :init
@@ -105,6 +103,9 @@
 ;;;;;;;;;;;;;;;;;;;
 ;; General stuff ;;
 ;;;;;;;;;;;;;;;;;;;
+
+;; self explanatory
+(setq require-final-newline t)
 
 ;; start window maximised
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -195,6 +196,9 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; Set minimum warning level to prevent native-comp popping up a
 ;; buffer with a ton of warnings
 (setq warning-minimum-level :error)
+
+;; Do not show ad-handle-definition warnings in the *Messages* buffer at startup
+(setq ad-redefinition-action 'accept)
 
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
@@ -372,7 +376,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; Markup, style, data and build tools
 
 (use-package tex
-  :straight auctex
+  :ensure auctex
   :init
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
   (add-hook 'LaTeX-mode-hook (lambda () (abbrev-mode 1))))
@@ -478,6 +482,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
          ("<remap> <list-buffers>" . helm-buffers-list))
   :config
   (setq completions-detailed t)
+  (setq helm-move-to-line-cycle-in-source nil)
   (customize-set-variable 'helm-mode-fuzzy-match t))
 
 (use-package helm-ag
@@ -524,6 +529,16 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :config
   (cljr-add-keybindings-with-prefix "C-c j")
   :hook (clojure-mode . clj-refactor-mode))
+
+(use-package copilot
+  :vc (:url "https://github.com/copilot-emacs/copilot.el"
+            :rev :newest
+            :branch "main")
+  :hook (prog-mode . copilot-mode)
+  :config
+  (setq copilot-idle-delay 0.5)
+  :bind (("C-<tab>" . copilot-accept-completion)
+         ("C-M-<tab>" . copilot-accept-completion-by-word)))
 
 (use-package gptel
   :config
@@ -636,10 +651,11 @@ A and then B."
 (use-package hackernews)
 
 ;;; Appearance
-
 (use-package doom-themes
   :config
-  (load-theme 'doom-molokai t))
+  (load-theme 'doom-molokai t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config))
 
 (use-package smart-mode-line
   :config
