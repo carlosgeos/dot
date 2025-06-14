@@ -218,6 +218,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 ;; show the current line and column numbers in the stats bar as well
 (line-number-mode t)
 (column-number-mode t)
+(size-indication-mode t)
 
 ;; do not allow horizontal split (on top of each other). Split side by side.
 (setq split-height-threshold nil)
@@ -563,13 +564,11 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :models '(grok-3-latest))
 
 ;;; Project management stuff
-
 (use-package projectile
   :config
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (setq projectile-completion-system 'helm)
-  (setq projectile-mode-line-function
-        '(lambda () (format " Proj[%s]" (projectile-project-name))))
+  (setq projectile-completion-system 'helm
+        projectile-mode-line-function '(lambda ()))
   (projectile-mode 1))
 
 (use-package helm-projectile
@@ -647,9 +646,21 @@ A and then B."
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config))
 
+(use-package rich-minority
+  :config
+  (setq rm-blacklist
+        (format "^ \\(%s\\)$"
+              (mapconcat #'identity
+                         '("Helm" "Projectile" "ElDoc" "Company" "company-box"
+                           "company-capf" "Anzu" "Paredit" "yas" "Copilot" "Gptel"
+                           "cljr" "Isearch")
+                         "\\|")))
+  (rich-minority-mode 1))
+
 (use-package smart-mode-line
   :config
-  (add-hook 'after-init-hook 'sml/setup t))
+  (add-hook 'after-init-hook 'sml/setup t)
+  (setq sml/mode-width 'right))
 
 ;; (use-package aggressive-indent
 ;;   :init
