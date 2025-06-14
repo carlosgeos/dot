@@ -547,16 +547,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq gptel-max-tokens 4096)
   (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
 
-(gptel-make-ollama "Ollama"
-  :host "localhost:11434"
-  :stream t
-  :models '(deepseek-coder-v2:16b
-            qwen2.5-coder:14b
-            phi4:latest
-            codellama:13b
-            starcoder:15b
-            gemma3:12b))
-
 (gptel-make-anthropic "Claude"
   :stream t
   :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
