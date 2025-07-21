@@ -561,7 +561,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-xai "xAI"
   :stream t
   :key (gptel-api-key-from-auth-source "api.x.ai" "apikey")
-  :models '(grok-3-latest))
+  :models '(grok-4-0709))
 
 ;;; Project management stuff
 (use-package projectile
