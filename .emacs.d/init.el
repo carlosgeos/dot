@@ -551,7 +551,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-anthropic "Claude"
   :stream t
   :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
-  :models '(claude-sonnet-4-20250514 claude-opus-4-20250514))
+  :models '(claude-sonnet-4-20250514 claude-opus-4-1-20250805))
 
 (gptel-make-gemini "Gemini"
   :stream t
@@ -561,7 +561,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-xai "xAI"
   :stream t
   :key (gptel-api-key-from-auth-source "api.x.ai" "apikey")
-  :models '(grok-4-0709))
+  :models '(grok-4-latest grok-code-fast-1))
 
 ;;; Project management stuff
 (use-package projectile
