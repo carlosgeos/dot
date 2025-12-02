@@ -486,9 +486,7 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq helm-move-to-line-cycle-in-source nil)
   (customize-set-variable 'helm-mode-fuzzy-match t))
 
-(use-package helm-ag
-  :bind
-  (("M-g a" . helm-do-grep-ag)))
+(use-package helm-rg)
 
 (use-package anzu
   :init
@@ -550,6 +548,11 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq gptel-default-mode 'text-mode)
   (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
 
+(gptel-make-openai "OpenAI"
+  :stream t
+  :key (gptel-api-key-from-auth-source "api.openai.com" "apikey")
+  :models '(gpt-4.1 gpt-5 gpt-5.1))
+
 (gptel-make-anthropic "Claude"
   :stream t
   :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
@@ -558,12 +561,12 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 (gptel-make-gemini "Gemini"
   :stream t
   :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-  :models'(gemini-2.5-flash-preview-05-20))
+  :models'(gemini-2.5-flash-preview-05-20 gemini-3-pro-preview))
 
 (gptel-make-xai "xAI"
   :stream t
   :key (gptel-api-key-from-auth-source "api.x.ai" "apikey")
-  :models '(grok-4-latest grok-code-fast-1))
+  :models '(grok-4-latest grok-code-fast-1 grok-4-fast-non-reasoning))
 
 ;;; Project management stuff
 (use-package projectile
