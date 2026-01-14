@@ -548,11 +548,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   (setq gptel-default-mode 'text-mode)
   (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
 
-(gptel-make-openai "OpenAI"
-  :stream t
-  :key (gptel-api-key-from-auth-source "api.openai.com" "apikey")
-  :models '(gpt-4.1 gpt-5 gpt-5.1))
-
 (gptel-make-anthropic "Claude"
   :stream t
   :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
