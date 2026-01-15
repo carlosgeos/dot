@@ -642,6 +642,10 @@ A and then B."
 ;;; Appearance
 (use-package doom-themes
   :config
+  ;;; Emacs 31 has stricter face-inheritance cycles checks. To avoid:
+  ;;; ⛔ Error (use-package): doom-themes/:config: Face inheritance results in inheritance cycle: gnus-group-news-low
+  (setcdr (assoc 'gnus-group-news-low-empty doom-themes-base-faces)
+          '(:inherit 'gnus-group-mail-1-empty :weight 'normal))
   (load-theme 'doom-molokai t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config))
