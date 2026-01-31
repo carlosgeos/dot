@@ -541,9 +541,9 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
 
 (use-package gptel
   :config
-  ;; Anthropic's max-tokens setting is 1024, so we need to raise it
+  ;; Anthropic's max-tokens setting is 4096, so we need to raise it
   ;; gptel issue #683
-  (setq gptel-max-tokens 4096)
+  (setq gptel-max-tokens 16384)
   (setq gptel-include-reasoning nil)
   (setq gptel-default-mode 'text-mode)
   (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
