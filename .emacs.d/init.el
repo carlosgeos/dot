@@ -136,7 +136,6 @@
 ;; User function keybindings
 (global-set-key [f5] 'anzu-query-replace)
 (global-set-key [f6] 'version)          ;TBD
-(global-set-key [f7] 'gptel-send)
 (global-set-key [f8] 'cider-eval-buffer)
 
 ;; smart tab behavior - indent or complete
@@ -539,30 +538,6 @@ BUFFER and ALIST are passed from `display-buffer-alist`"
   :bind (("C-<tab>" . copilot-accept-completion)
          ("C-M-<tab>" . copilot-accept-completion-by-word)))
 
-(use-package gptel
-  :config
-  ;; Anthropic's max-tokens setting is 4096, so we need to raise it
-  ;; gptel issue #683
-  (setq gptel-max-tokens 16384)
-  (setq gptel-include-reasoning nil)
-  (setq gptel-default-mode 'text-mode)
-  (setq gptel-api-key (gptel-api-key-from-auth-source "api.openai.com" "apikey")))
-
-(gptel-make-anthropic "Claude"
-  :stream t
-  :key (gptel-api-key-from-auth-source "api.anthropic.com" "apikey")
-  :models '(claude-sonnet-4-5-20250929 claude-opus-4-5-20251101))
-
-(gptel-make-gemini "Gemini"
-  :stream t
-  :key (gptel-api-key-from-auth-source "generativelanguage.googleapis.com" "apikey")
-  :models'(gemini-3-flash-preview gemini-3-pro-preview))
-
-(gptel-make-xai "xAI"
-  :stream t
-  :key (gptel-api-key-from-auth-source "api.x.ai" "apikey")
-  :models '(grok-4-latest grok-code-fast-1 grok-4-1-fast))
-
 ;;; Project management stuff
 (use-package projectile
   :config
@@ -656,7 +631,7 @@ A and then B."
         (format "^ \\(%s\\)$"
               (mapconcat #'identity
                          '("Helm" "Projectile" "ElDoc" "Company" "company-box"
-                           "company-capf" "Anzu" "Paredit" "yas" "Copilot" "Gptel"
+                           "company-capf" "Anzu" "Paredit" "yas" "Copilot"
                            "cljr" "Isearch")
                          "\\|")))
   (rich-minority-mode 1))
